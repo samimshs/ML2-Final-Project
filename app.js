@@ -7,9 +7,6 @@ const state = {
   openEarBaseline: 0.32,
   closedEarThreshold: 0.21,
   smoothedEar: null,
-  calibrationValues: [],
-  calibrationStartedAt: null,
-  calibrationComplete: false,
   score: 0,
   history: [],
   alerts: 0,
@@ -43,7 +40,6 @@ const els = {
 };
 
 const IMG_SIZE = 80;
-const CALIBRATION_MS = 3000;
 const ALARM_DELAY_MS = 800;
 const MIN_SLEEPY_FRAMES = 5;
 const EAR_SMOOTHING_ALPHA = 0.35;
@@ -367,7 +363,7 @@ function drawOverlay(status, boxes = [], probs = []) {
       Math.max(1, els.video.videoHeight)
     );
     const prob = probs[index] ?? 0;
-    const sleepy = state.calibrationComplete && state.score >= 1.0;
+    const sleepy = state.score >= 1.0;
     ctx.strokeStyle = sleepy ? "#ff4d4f" : "#42d779";
     ctx.lineWidth = 2;
     ctx.strokeRect(displayBox.x, displayBox.y, displayBox.width, displayBox.height);
@@ -439,43 +435,27 @@ async function loop(now) {
       );
     }
 
-    if (!state.calibrationComplete) {
-      if (state.calibrationStartedAt == null) state.calibrationStartedAt = now;
-      state.calibrationValues.push(state.smoothedEar);
-      status = "Calibrating";
-      state.sleepyFrames = 0;
-      state.sleepyStartedAt = null;
+    sleepScore = earToSleepScore(Math.max(result.rightEar, result.leftEar));
+    state.score = sleepScore;
 
-      if (now - state.calibrationStartedAt >= CALIBRATION_MS && state.calibrationValues.length >= 10) {
-        const sorted = [...state.calibrationValues].sort((a, b) => a - b);
-        state.openEarBaseline = sorted[Math.floor(sorted.length / 2)];
-        state.closedEarThreshold = state.openEarBaseline * 0.72;
-        state.calibrationComplete = true;
+    const rightEyeClosed = result.rightEar <= state.closedEarThreshold;
+    const leftEyeClosed = result.leftEar <= state.closedEarThreshold;
+    const sleepyNow = rightEyeClosed && leftEyeClosed;
+
+    if (sleepyNow) {
+      state.sleepyFrames += 1;
+
+      if (state.sleepyFrames >= MIN_SLEEPY_FRAMES) {
+        if (state.sleepyStartedAt == null) state.sleepyStartedAt = now;
+        closedMs = now - state.sleepyStartedAt;
+        status = closedMs >= ALARM_DELAY_MS ? "ALERT" : "Sleepy";
+      } else {
         status = "Awake";
       }
     } else {
-      sleepScore = earToSleepScore(Math.max(result.rightEar, result.leftEar));
-      state.score = sleepScore;
-
-      const rightEyeClosed = result.rightEar <= state.closedEarThreshold;
-      const leftEyeClosed = result.leftEar <= state.closedEarThreshold;
-      const sleepyNow = rightEyeClosed && leftEyeClosed;
-
-      if (sleepyNow) {
-        state.sleepyFrames += 1;
-
-        if (state.sleepyFrames >= MIN_SLEEPY_FRAMES) {
-          if (state.sleepyStartedAt == null) state.sleepyStartedAt = now;
-          closedMs = now - state.sleepyStartedAt;
-          status = closedMs >= ALARM_DELAY_MS ? "ALERT" : "Sleepy";
-        } else {
-          status = "Awake";
-        }
-      } else {
-        state.sleepyFrames = 0;
-        state.sleepyStartedAt = null;
-        status = "Awake";
-      }
+      state.sleepyFrames = 0;
+      state.sleepyStartedAt = null;
+      status = "Awake";
     }
 
     if (status === "ALERT") {
@@ -534,15 +514,12 @@ async function start() {
   state.score = 0;
   state.history = [];
   state.smoothedEar = null;
-  state.calibrationValues = [];
-  state.calibrationStartedAt = null;
-  state.calibrationComplete = false;
   state.openEarBaseline = 0.32;
   state.closedEarThreshold = 0.21;
   state.sleepyFrames = 0;
   state.sleepyStartedAt = null;
   state.lastFrameAt = performance.now();
-  setStatus("Calibrating");
+  setStatus("Awake");
 
   requestAnimationFrame(loop);
 }
