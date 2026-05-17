@@ -1,0 +1,9 @@
+{
+  "name": "deepeyes-deployment-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static Netlify deployment site for the DeepEyes drowsiness detector.",
+  "scripts": {
+    "build": "echo 'Static site: no build step required.'"
+  }
+}
