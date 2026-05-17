@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101418">
+    <title>DeepEyes Drowsiness Detector</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="DeepEyes live detector">
+        <header class="topbar">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">
+              <i data-lucide="eye"></i>
+            </span>
+            <div>
+              <h1>DeepEyes</h1>
+              <p>Real-time drowsiness detection</p>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <span class="model-chip" id="modelChip">
+              <i data-lucide="cpu"></i>
+              Model standby
+            </span>
+            <button class="icon-button" id="themeButton" type="button" aria-label="Toggle theme" title="Toggle theme">
+              <i data-lucide="sun"></i>
+            </button>
+          </div>
+        </header>
+
+        <section class="camera-stage">
+          <div class="video-wrap">
+            <video id="video" playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            <div class="empty-state" id="emptyState">
+              <i data-lucide="camera"></i>
+              <h2>Camera is off</h2>
+              <p>Start the detector when you are ready to test the live workflow.</p>
+            </div>
+            <div class="alert-frame" id="alertFrame" aria-hidden="true">
+              <span>WAKE UP</span>
+            </div>
+          </div>
+
+          <aside class="status-panel">
+            <div class="status-main">
+              <span class="status-label">Current status</span>
+              <strong id="statusText">Standby</strong>
+            </div>
+
+            <div class="meter-block">
+              <div class="meter-head">
+                <span>Sleep score</span>
+                <strong id="scoreText">0.00</strong>
+              </div>
+              <div class="meter" aria-hidden="true">
+                <span id="scoreFill"></span>
+              </div>
+            </div>
+
+            <div class="metrics-grid" aria-label="Detector metrics">
+              <div>
+                <span>Threshold</span>
+                <strong id="thresholdText">--</strong>
+              </div>
+              <div>
+                <span>Timer</span>
+                <strong id="timerText">0.0s</strong>
+              </div>
+              <div>
+                <span>Alerts</span>
+                <strong id="alertsText">0</strong>
+              </div>
+              <div>
+                <span>FPS</span>
+                <strong id="fpsText">--</strong>
+              </div>
+            </div>
+
+            <canvas class="sparkline" id="scoreChart" width="320" height="96" aria-label="Recent sleep score chart"></canvas>
+          </aside>
+        </section>
+
+        <section class="control-strip" aria-label="Detector controls">
+          <button class="primary-button" id="startButton" type="button">
+            <i data-lucide="play"></i>
+            Start Detector
+          </button>
+          <button class="secondary-button" id="stopButton" type="button" disabled>
+            <i data-lucide="square"></i>
+            Stop
+          </button>
+          <label class="toggle-row">
+            <input id="soundToggle" type="checkbox" checked>
+            <span>Sound alarm</span>
+          </label>
+        </section>
+      </section>
+
+      <section class="side-rail" aria-label="Deployment information">
+        <div class="rail-section">
+          <h2>Live Workflow</h2>
+          <ol class="steps">
+            <li><span>1</span>Allow camera access.</li>
+            <li><span>2</span>Face the camera with both eyes visible.</li>
+            <li><span>3</span>EAR logic checks if both eyes are closed.</li>
+            <li><span>4</span>The alarm starts after the Step 6 delay.</li>
+          </ol>
+        </div>
+
+        <div class="rail-section">
+          <h2>Model Files</h2>
+          <div class="file-list">
+            <div>
+              <i data-lucide="file-json"></i>
+              <span>assets/model/weights-manifest.json</span>
+            </div>
+            <div>
+              <i data-lucide="volume-2"></i>
+              <span>assets/audio/beep.wav</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail-section">
+          <h2>Browser Support</h2>
+          <p>The site uses standard browser camera APIs and TensorFlow.js, so deployed users can run it from macOS or Windows without installing Python.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
