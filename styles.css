@@ -45,7 +45,7 @@ input {
 }
 
 .app-shell {
-  width: min(1440px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   min-height: calc(100vh - 32px);
   margin: 16px auto;
 }
@@ -234,7 +234,9 @@ button:disabled {
 
 .camera-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: minmax(360px, 640px) minmax(300px, 340px);
+  justify-content: center;
+  align-items: start;
   gap: 18px;
   min-height: 0;
   padding: 18px;
@@ -242,7 +244,10 @@ button:disabled {
 
 .video-wrap {
   position: relative;
-  min-height: 420px;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   overflow: hidden;
   background: #070a0d;
   border: 1px solid var(--line);
@@ -450,6 +455,12 @@ svg {
 @media (max-width: 1120px) {
   .camera-stage {
     grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .video-wrap,
+  .status-panel {
+    width: min(100%, 640px);
   }
 }
 
@@ -533,8 +544,9 @@ svg {
   }
 
   .video-wrap {
-    min-height: 360px;
-    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 1 / 1;
   }
 
 }
