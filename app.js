@@ -61,11 +61,13 @@ function setStatus(text) {
 
 function showStartupDetail(message) {
   console.error(message);
+  if (!els.modelChip) return;
   els.modelChip.innerHTML = `<i data-lucide="circle-alert"></i>${message}`;
   if (window.lucide) window.lucide.createIcons();
 }
 
 function setModelChip(text) {
+  if (!els.modelChip) return;
   els.modelChip.innerHTML = `<i data-lucide="cpu"></i>${text}`;
   if (window.lucide) window.lucide.createIcons();
 }
@@ -388,6 +390,29 @@ function playAlarm() {
   state.alarmAudio.play().catch(() => {});
 }
 
+async function unlockAlarmAudio() {
+  if (!state.alarmAudio) {
+    state.alarmAudio = new Audio("assets/audio/beep.wav");
+    state.alarmAudio.preload = "auto";
+    state.alarmAudio.loop = false;
+    state.alarmAudio.playsInline = true;
+  }
+
+  if (!els.soundToggle.checked) return;
+
+  const previousVolume = state.alarmAudio.volume;
+  try {
+    state.alarmAudio.volume = 0;
+    await state.alarmAudio.play();
+    state.alarmAudio.pause();
+    state.alarmAudio.currentTime = 0;
+  } catch (error) {
+    console.warn("Audio unlock was blocked until alarm time.", error);
+  } finally {
+    state.alarmAudio.volume = previousVolume;
+  }
+}
+
 async function loop(now) {
   if (!state.running) return;
 
@@ -484,6 +509,7 @@ async function start() {
 
   els.startButton.disabled = true;
   setStatus("Opening Camera");
+  await unlockAlarmAudio();
 
   await startCamera();
   els.stopButton.disabled = false;

@@ -62,7 +62,7 @@ input {
 
 .workspace {
   display: grid;
-  grid-template-rows: auto minmax(420px, 1fr) auto;
+  grid-template-rows: auto auto minmax(420px, 1fr);
   min-width: 0;
 }
 
@@ -80,7 +80,16 @@ input {
   justify-content: flex-start;
   flex-wrap: wrap;
   border-top: 1px solid var(--line);
-  border-bottom: 0;
+  border-bottom: 1px solid var(--line);
+  order: 2;
+}
+
+.camera-stage {
+  order: 3;
+}
+
+.topbar {
+  order: 1;
 }
 
 .brand,
@@ -444,7 +453,7 @@ svg {
   }
 
   .side-rail {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 
@@ -473,6 +482,24 @@ svg {
   .topbar,
   .control-strip {
     padding: 14px;
+  }
+
+  .control-strip {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--panel) 96%, transparent);
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-height: 46px;
+    flex: 1 1 132px;
+  }
+
+  .toggle-row {
+    flex: 1 1 100%;
+    min-height: 34px;
   }
 
   .model-chip {
