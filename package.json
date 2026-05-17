@@ -4,6 +4,6 @@
   "private": true,
   "description": "Static Netlify deployment site for the DeepEyes drowsiness detector.",
   "scripts": {
-    "build": "echo 'Static site: no build step required.'"
+    "build": "node build-static.js"
   }
 }
