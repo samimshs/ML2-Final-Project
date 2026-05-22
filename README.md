@@ -1,6 +1,6 @@
-# DeepEyes Deployment Site
+# OcuState Computer Vision Deployment Site
 
-This folder contains the Netlify-ready website for DeepEyes.
+This folder contains the Netlify-ready website for OcuState Computer Vision.
 
 ## Local preview
 

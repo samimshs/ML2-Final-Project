@@ -1,8 +1,8 @@
 {
-  "name": "deepeyes-deployment-site",
+  "name": "ocustate-computer-vision-deployment-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Static Netlify deployment site for the DeepEyes drowsiness detector.",
+  "description": "Static Netlify deployment site for the OcuState Computer Vision drowsiness detector.",
   "scripts": {
     "build": "node build-static.js"
   }
