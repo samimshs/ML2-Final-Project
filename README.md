@@ -4,6 +4,7 @@ This folder contains the Netlify-ready portfolio website. The home page is a cle
 
 - **Machine Learning**: opens a list of machine learning projects.
 - **Softwares**: opens a list of software projects.
+- **Data**: opens a list of data projects and API-connected tools.
 - **Others**: reserved for future work.
 
 The existing OcuState detector content is preserved on its own page and remains reachable from the Machine Learning section.
@@ -39,6 +40,16 @@ Daftarcha is an offline-first business management app for small Afghan shops, wh
 
 ```text
 daftarcha/
+```
+
+### Data
+
+- `data.html`: data project list
+
+DataHub is a global data explorer connected to public World Bank, FAO, and WHO data sources. The portfolio includes a built web copy at:
+
+```text
+datahub/
 ```
 
 ### Others

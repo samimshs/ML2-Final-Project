@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8fb">
+    <meta name="description" content="Data projects by Sami Samim.">
+    <title>Data | Sami Samim</title>
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) window.lucide.createIcons();
+      });
+    </script>
+  </head>
+  <body class="directory-page">
+    <main class="directory-shell">
+      <header class="directory-header">
+        <a class="back-link" href="index.html">
+          <i data-lucide="arrow-left"></i>
+          Home
+        </a>
+        <div>
+          <p class="landing-kicker">Category</p>
+          <h1>Data</h1>
+          <p>Data products, dashboards, and API-connected analysis tools.</p>
+        </div>
+      </header>
+
+      <section class="project-list" aria-label="Data project list">
+        <a class="project-row" href="datahub/">
+          <span class="project-row-icon data-icon" aria-hidden="true">
+            <i data-lucide="database"></i>
+          </span>
+          <span>
+            <strong>DataHub</strong>
+            <small>Global data explorer connected to World Bank, FAO, and WHO data sources for indicators, charts, comparisons, and downloads.</small>
+          </span>
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </section>
+    </main>
+  </body>
+</html>
