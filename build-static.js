@@ -16,6 +16,7 @@ const copyTargets = [
   "styles.css",
   "app.js",
   "assets",
+  "DESKTOP_APP_INSTALL_README.md",
   "README.md",
   "netlify.toml",
 ];

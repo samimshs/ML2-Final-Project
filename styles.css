@@ -252,6 +252,48 @@ a {
   color: #0f766e;
 }
 
+.project-row-icon.money-icon {
+  background: rgba(16, 185, 129, 0.13);
+  color: #047857;
+}
+
+.project-row-icon.guide-icon {
+  background: rgba(100, 116, 139, 0.12);
+  color: #475569;
+}
+
+.download-row {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.download-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(66, 133, 244, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.68);
+  color: #1d4ed8;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.download-actions a:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .empty-directory {
   display: grid;
   justify-items: center;
@@ -896,6 +938,19 @@ svg {
 
   .project-row {
     grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .download-row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .download-actions {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .download-actions a {
+    flex: 1 1 140px;
   }
 
   .project-row > svg {

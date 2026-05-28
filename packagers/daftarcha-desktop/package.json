@@ -1,0 +1,44 @@
+{
+  "name": "daftarcha-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Daftarcha desktop wrapper",
+  "main": "main.js",
+  "author": "Sami Samim",
+  "build": {
+    "appId": "com.samisamim.daftarcha",
+    "productName": "Daftarcha",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "app/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": null,
+      "sign": false
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Daftarcha"
+    }
+  },
+  "devDependencies": {
+    "electron": "^26.6.10",
+    "electron-builder": "^24.0.0"
+  }
+}
