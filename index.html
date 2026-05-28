@@ -3,182 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101418">
-    <meta name="description" content="Samim's portfolio of machine learning projects and software products.">
-    <title>Samim Samim | Machine Learning Projects & Software</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <meta name="theme-color" content="#f7f8fb">
+    <meta name="description" content="Samim's portfolio of machine learning projects, software, and other work.">
+    <title>Samim Samim | Projects</title>
+    <link rel="preconnect" href="https://unpkg.com">
     <link rel="stylesheet" href="styles.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
     <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script defer src="app.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (window.lucide) window.lucide.createIcons();
+      });
+    </script>
   </head>
-  <body>
-    <main class="app-shell">
-      <header class="portfolio-header">
-        <div class="portfolio-title">
-          <span class="eyebrow">Samim Samim</span>
-          <h1>Machine learning projects and software products</h1>
-          <p>Selected work across practical AI, computer vision, and business software.</p>
-        </div>
-        <nav class="section-tabs" aria-label="Portfolio sections">
-          <a href="#machine-learning">
+  <body class="home-page">
+    <main class="landing-shell" aria-label="Project categories">
+      <section class="landing-center">
+        <p class="landing-kicker">Samim Samim</p>
+        <h1>Projects</h1>
+        <nav class="glass-tabs" aria-label="Project categories">
+          <a href="machine-learning.html">
             <i data-lucide="brain-circuit"></i>
-            Machine Learning Projects
+            <span>Machine Learning</span>
           </a>
-          <a href="#softwares">
+          <a href="softwares.html">
             <i data-lucide="blocks"></i>
-            Softwares
+            <span>Softwares</span>
+          </a>
+          <a href="others.html">
+            <i data-lucide="sparkles"></i>
+            <span>Others</span>
           </a>
         </nav>
-      </header>
-
-      <section class="portfolio-section" id="machine-learning" aria-labelledby="machineLearningTitle">
-        <div class="section-heading">
-          <span class="eyebrow">Section 1</span>
-          <h2 id="machineLearningTitle">Machine Learning Projects</h2>
-          <p>Interactive ML demos and applied model workflows.</p>
-        </div>
-
-        <section class="workspace" aria-label="OcuState Computer Vision live detector">
-        <header class="topbar">
-          <div class="brand">
-            <span class="brand-mark" aria-hidden="true">
-              <i data-lucide="eye"></i>
-            </span>
-            <div>
-              <h1>OcuState Computer Vision</h1>
-              <p>Real-time drowsiness detection</p>
-            </div>
-          </div>
-
-          <div class="topbar-actions">
-            <ol class="header-steps" aria-label="Live workflow">
-              <li><span>1</span>Allow camera access</li>
-              <li><span>2</span>Face the camera</li>
-            </ol>
-            <button class="icon-button" id="themeButton" type="button" aria-label="Toggle theme" title="Toggle theme">
-              <i data-lucide="sun"></i>
-            </button>
-          </div>
-        </header>
-
-        <section class="camera-stage">
-          <div class="video-wrap">
-            <video id="video" playsinline muted></video>
-            <canvas id="overlay"></canvas>
-            <div class="empty-state" id="emptyState">
-              <i data-lucide="camera"></i>
-              <h2>Camera is off</h2>
-              <p>Start the detector when you are ready to test the live workflow.</p>
-            </div>
-            <div class="alert-frame" id="alertFrame" aria-hidden="true">
-              <span>WAKE UP</span>
-            </div>
-          </div>
-
-          <aside class="status-panel">
-            <div class="status-main">
-              <span class="status-label">Current status</span>
-              <strong id="statusText">Standby</strong>
-            </div>
-
-            <div class="meter-block">
-              <div class="meter-head">
-                <span>Sleep score</span>
-                <strong id="scoreText">0.00</strong>
-              </div>
-              <div class="meter" aria-hidden="true">
-                <span id="scoreFill"></span>
-              </div>
-            </div>
-
-            <div class="metrics-grid" aria-label="Detector metrics">
-              <div>
-                <span>Threshold</span>
-                <strong id="thresholdText">--</strong>
-              </div>
-              <div>
-                <span>Timer</span>
-                <strong id="timerText">0.0s</strong>
-              </div>
-              <div>
-                <span>Alerts</span>
-                <strong id="alertsText">0</strong>
-              </div>
-              <div>
-                <span>FPS</span>
-                <strong id="fpsText">--</strong>
-              </div>
-            </div>
-
-            <canvas class="sparkline" id="scoreChart" width="320" height="96" aria-label="Recent sleep score chart"></canvas>
-            <div class="site-notice">
-              <strong>Notice:</strong>
-              OcuState Computer Vision project is a prototype for demonstration and learning. Do not rely on it for driving, workplace safety, medical decisions, or any situation where alertness monitoring could affect personal safety.
-            </div>
-          </aside>
-        </section>
-
-        <section class="control-strip" aria-label="Detector controls">
-          <button class="primary-button" id="startButton" type="button">
-            <i data-lucide="play"></i>
-            Start Detector
-          </button>
-          <button class="secondary-button" id="stopButton" type="button" disabled>
-            <i data-lucide="square"></i>
-            Stop
-          </button>
-          <label class="toggle-row">
-            <input id="soundToggle" type="checkbox" checked>
-            <span>Sound alarm</span>
-          </label>
-        </section>
-      </section>
-
-      </section>
-
-      <section class="portfolio-section" id="softwares" aria-labelledby="softwaresTitle">
-        <div class="section-heading">
-          <span class="eyebrow">Section 2</span>
-          <h2 id="softwaresTitle">Softwares</h2>
-          <p>Tools built for real workflows, with a focus on usable products rather than demos.</p>
-        </div>
-
-        <article class="software-card">
-          <div class="software-main">
-            <div class="software-icon" aria-hidden="true">
-              <i data-lucide="store"></i>
-            </div>
-            <div>
-              <span class="project-type">Offline-first business management app</span>
-              <h3>Daftarcha</h3>
-              <p>
-                Daftarcha helps small Afghan shops, wholesalers, pharmacies, and traders manage products,
-                inventory, sales, customers, debts, suppliers, reports, and local data backups.
-              </p>
-              <div class="tag-list" aria-label="Daftarcha features">
-                <span>React + Vite</span>
-                <span>TypeScript</span>
-                <span>IndexedDB</span>
-                <span>Dexie.js</span>
-                <span>Offline-first</span>
-                <span>AI assistant</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="software-actions">
-            <a class="primary-link" href="https://github.com/samimshs/Daftarcha" target="_blank" rel="noreferrer">
-              <i data-lucide="github"></i>
-              View repository
-            </a>
-            <a class="secondary-link" href="#machine-learning">
-              <i data-lucide="arrow-up"></i>
-              Back to ML projects
-            </a>
-          </div>
-        </article>
       </section>
     </main>
   </body>

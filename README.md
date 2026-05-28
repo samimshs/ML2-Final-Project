@@ -1,11 +1,12 @@
 # Samim Portfolio Site
 
-This folder contains the Netlify-ready portfolio website. It is organized into two main sections:
+This folder contains the Netlify-ready portfolio website. The home page is a clean category launcher with:
 
-- **Machine Learning Projects**: includes the existing OcuState Computer Vision drowsiness detector.
-- **Softwares**: highlights software products, starting with Daftarcha.
+- **Machine Learning**: opens a list of machine learning projects.
+- **Softwares**: opens a list of software projects.
+- **Others**: reserved for future work.
 
-The existing OcuState detector content is preserved and remains usable from the Machine Learning Projects section.
+The existing OcuState detector content is preserved on its own page and remains reachable from the Machine Learning section.
 
 ## Local preview
 
@@ -23,17 +24,26 @@ http://localhost:8888
 
 ## Current sections
 
-### Machine Learning Projects
+### Machine Learning
+
+- `machine-learning.html`: project list
+- `ocustate.html`: OcuState Computer Vision detector
 
 OcuState Computer Vision is a browser-based drowsiness detector. It uses MediaPipe FaceMesh for facial landmarks and TensorFlow.js for the browser model workflow.
 
 ### Softwares
 
-Daftarcha is an offline-first business management app for small Afghan shops, wholesalers, pharmacies, and traders. It is linked to:
+- `softwares.html`: software list
+
+Daftarcha is an offline-first business management app for small Afghan shops, wholesalers, pharmacies, and traders. It currently links to:
 
 ```text
 https://github.com/samimshs/Daftarcha
 ```
+
+### Others
+
+- `others.html`: reserved category page for future additions
 
 ## OcuState model assets
 

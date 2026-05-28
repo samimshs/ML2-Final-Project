@@ -6,6 +6,10 @@ const outDir = path.join(root, ".next");
 
 const copyTargets = [
   "index.html",
+  "machine-learning.html",
+  "softwares.html",
+  "others.html",
+  "ocustate.html",
   "styles.css",
   "app.js",
   "assets",
