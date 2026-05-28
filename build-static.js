@@ -10,6 +10,7 @@ const copyTargets = [
   "softwares.html",
   "others.html",
   "ocustate.html",
+  "daftarcha",
   "styles.css",
   "app.js",
   "assets",

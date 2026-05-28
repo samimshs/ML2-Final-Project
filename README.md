@@ -35,10 +35,10 @@ OcuState Computer Vision is a browser-based drowsiness detector. It uses MediaPi
 
 - `softwares.html`: software list
 
-Daftarcha is an offline-first business management app for small Afghan shops, wholesalers, pharmacies, and traders. It currently links to:
+Daftarcha is an offline-first business management app for small Afghan shops, wholesalers, pharmacies, and traders. The portfolio includes a built web copy at:
 
 ```text
-https://github.com/samimshs/Daftarcha
+daftarcha/
 ```
 
 ### Others
