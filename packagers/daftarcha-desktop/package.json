@@ -16,7 +16,14 @@
       "main.js",
       "package.json"
     ],
+    "extraResources": [
+      {
+        "from": "INSTALL_README.md",
+        "to": "INSTALL_README.md"
+      }
+    ],
     "mac": {
+      "icon": "build/icon.icns",
       "target": [
         "dmg",
         "zip"
@@ -25,6 +32,7 @@
       "sign": false
     },
     "win": {
+      "icon": "build/icon.ico",
       "target": [
         "nsis"
       ]

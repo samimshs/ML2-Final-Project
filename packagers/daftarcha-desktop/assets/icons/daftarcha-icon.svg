@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="156" y1="92" x2="888" y2="924" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1f7a5a"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="294" y1="230" x2="746" y2="824" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff7ed"/>
+      <stop offset="1" stop-color="#fed7aa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+  <path d="M214 392 324 252h376l110 140v88H214v-88Z" fill="#fffbeb"/>
+  <path d="M250 480h524v290c0 44-36 80-80 80H330c-44 0-80-36-80-80V480Z" fill="#064e3b" opacity=".24"/>
+  <path d="M304 446h416v354c0 36-29 66-66 66H370c-36 0-66-29-66-66V446Z" fill="url(#paper)"/>
+  <path d="M214 392h596v68c0 49-40 88-88 88-38 0-70-24-83-57-13 33-45 57-83 57s-70-24-83-57c-13 33-45 57-83 57s-70-24-83-57c-13 33-45 57-83 57-49 0-88-40-88-88v-68Z" fill="#f97316"/>
+  <path d="M356 620h312" stroke="#14532d" stroke-width="52" stroke-linecap="round"/>
+  <path d="M356 724h206" stroke="#14532d" stroke-width="52" stroke-linecap="round"/>
+  <circle cx="658" cy="724" r="40" fill="#f59e0b"/>
+</svg>

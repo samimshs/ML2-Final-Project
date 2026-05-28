@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .next/
 downloads/
+node_modules/
+release/
+packagers/**/node_modules/
+packagers/**/release/
