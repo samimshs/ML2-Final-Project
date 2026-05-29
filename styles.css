@@ -266,6 +266,24 @@ a {
   grid-template-columns: auto minmax(0, 1fr) auto;
 }
 
+.software-preview {
+  grid-column: 2 / -1;
+  margin: 12px 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(66, 133, 244, 0.14);
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.04);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.10);
+}
+
+.software-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top left;
+}
+
 .download-actions {
   display: flex;
   flex-wrap: wrap;
@@ -944,6 +962,10 @@ svg {
     grid-template-columns: auto minmax(0, 1fr);
   }
 
+  .software-preview {
+    grid-column: 1 / -1;
+  }
+
   .download-actions {
     grid-column: 1 / -1;
     justify-content: stretch;
@@ -1082,5 +1104,5 @@ svg {
 }
 
 .landing-center h2 {
-  font-size: 2.5rem; /* Increase or decrease this value until it looks right */
+  font-size: 3.0rem; /* Increase or decrease this value until it looks right */
 }

@@ -1,10 +1,11 @@
-MoneyMate for macOS - Read Me
+MoneyMate for macOS Apple Silicon - Read Me
 
 Files in this download:
 - Installer - MoneyMate.dmg
 - Read Me - macOS.txt
 
 Install steps:
+0. This download is built for Apple Silicon Macs (M1, M2, M3, M4, and newer).
 1. Open "Installer - MoneyMate.dmg".
 2. Drag MoneyMate into the Applications folder.
 3. Open MoneyMate from Applications.
