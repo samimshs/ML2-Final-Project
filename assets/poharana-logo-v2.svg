@@ -1,0 +1,51 @@
+<svg width="640" height="160" viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>PohaRana Logo</title>
+  <desc>PohaRana full logo — PR monogram icon alongside Plus Jakarta Sans wordmark and tagline</desc>
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Icon -->
+  <rect x="0" y="0" width="160" height="160" rx="38" fill="#0057FF"/>
+
+  <!-- P — vertical bar -->
+  <rect x="34" y="32" width="17" height="96" rx="5" fill="#ffffff"/>
+
+  <!-- P — bowl -->
+  <path d="M51 32 Q101 32 101 60 Q101 88 51 88" fill="none" stroke="#ffffff" stroke-width="17" stroke-linecap="round"/>
+
+  <!-- R — vertical bar -->
+  <rect x="86" y="62" width="17" height="66" rx="5" fill="#ffffff"/>
+
+  <!-- R — bowl -->
+  <path d="M103 62 Q132 62 132 84 Q132 106 103 106" fill="none" stroke="#ffffff" stroke-width="17" stroke-linecap="round"/>
+
+  <!-- R — leg -->
+  <line x1="107" y1="106" x2="134" y2="130" stroke="#ffffff" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Wordmark -->
+  <text
+    x="184"
+    y="103"
+    font-family="'Plus Jakarta Sans', 'Arial Black', sans-serif"
+    font-weight="800"
+    font-size="64"
+    letter-spacing="-2"
+    fill="#0a0a0a"
+  >PohaRana</text>
+
+  <!-- Tagline -->
+  <text
+    x="186"
+    y="132"
+    font-family="'Plus Jakarta Sans', Arial, sans-serif"
+    font-weight="300"
+    font-size="14"
+    letter-spacing="3.5"
+    fill="#0057FF"
+  >EDUCATION PLATFORM</text>
+
+</svg>
