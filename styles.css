@@ -263,7 +263,8 @@ a {
 }
 
 .download-row {
-  grid-template-columns: auto minmax(0, 1fr) minmax(150px, 210px) auto;
+  grid-template-columns: auto minmax(0, 1fr) minmax(190px, 240px) 190px;
+  column-gap: 18px;
 }
 
 .software-preview {
@@ -352,10 +353,10 @@ a {
 .download-actions {
   grid-column: 4;
   grid-row: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  display: grid;
+  align-content: center;
   gap: 8px;
+  width: 190px;
 }
 
 .download-actions a {
@@ -364,6 +365,7 @@ a {
   justify-content: center;
   gap: 8px;
   min-height: 40px;
+  width: 100%;
   padding: 0 12px;
   border: 1px solid rgba(66, 133, 244, 0.2);
   border-radius: 12px;
@@ -1032,15 +1034,16 @@ svg {
   .software-preview {
     grid-column: 1 / -1;
     max-width: 240px;
+    justify-self: end;
   }
 
   .download-actions {
     grid-column: 1 / -1;
-    justify-content: stretch;
+    width: 100%;
   }
 
   .download-actions a {
-    flex: 1 1 140px;
+    width: 100%;
   }
 
   .project-row > svg {
