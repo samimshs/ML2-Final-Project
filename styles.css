@@ -1080,3 +1080,7 @@ svg {
   }
 
 }
+
+.landing-center h2 {
+  font-size: 2.5rem; /* Increase or decrease this value until it looks right */
+}
