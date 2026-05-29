@@ -2,12 +2,12 @@
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&amp;family=Syne:wght@800&amp;display=swap');
-      .wm-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 34px; fill: #0d1b2e; letter-spacing: -0.02em; }
+      .wm-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 34px; fill: #e0ecff; letter-spacing: -0.02em; text-rendering: geometricPrecision; }
       .wm-accent { fill: #1a6bff; }
-      .wm-sub { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 11px; fill: #4a7ab5; letter-spacing: 0.1em; text-transform: uppercase; }
+      .wm-sub { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 11px; fill: #8ab4e8; letter-spacing: 0.1em; text-transform: uppercase; }
       @media (prefers-color-scheme: dark) {
-        .wm-name { fill: #ffffff; }
-        .wm-sub { fill: #8ab4e8; }
+        .wm-name { fill: #0d1b2e; }
+        .wm-sub { fill: #4a7ab5; }
       }
     </style>
   </defs>
