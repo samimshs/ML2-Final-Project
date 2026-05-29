@@ -6,8 +6,8 @@
       .wm-accent { fill: #1a6bff; }
       .wm-sub { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 11px; fill: #4a7ab5; letter-spacing: 0.1em; text-transform: uppercase; }
       @media (prefers-color-scheme: dark) {
-        .wm-name { fill: #e0ecff; }
-        .wm-sub { fill: #6da0d8; }
+        .wm-name { fill: #ffffff; }
+        .wm-sub { fill: #8ab4e8; }
       }
     </style>
   </defs>
