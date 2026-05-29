@@ -1,0 +1,41 @@
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&amp;family=Syne:wght@800&amp;display=swap');
+      .wm-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 34px; fill: #0d1b2e; letter-spacing: -0.02em; }
+      .wm-accent { fill: #1a6bff; }
+      .wm-sub { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 11px; fill: #4a7ab5; letter-spacing: 0.1em; text-transform: uppercase; }
+      @media (prefers-color-scheme: dark) {
+        .wm-name { fill: #e0ecff; }
+        .wm-sub { fill: #6da0d8; }
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(20, 20)">
+    <rect width="80" height="80" rx="16" fill="#0d1b2e"/>
+    <line x1="18" y1="20" x2="40" y2="16" stroke="#1a6bff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="18" y1="20" x2="40" y2="40" stroke="#1a6bff" stroke-width="0.8" opacity="0.3"/>
+    <line x1="18" y1="40" x2="40" y2="16" stroke="#1a6bff" stroke-width="0.8" opacity="0.3"/>
+    <line x1="18" y1="40" x2="40" y2="40" stroke="#1a6bff" stroke-width="1.2" opacity="0.7"/>
+    <line x1="18" y1="40" x2="40" y2="64" stroke="#1a6bff" stroke-width="0.8" opacity="0.3"/>
+    <line x1="18" y1="60" x2="40" y2="40" stroke="#1a6bff" stroke-width="0.8" opacity="0.3"/>
+    <line x1="18" y1="60" x2="40" y2="64" stroke="#1a6bff" stroke-width="1.2" opacity="0.6"/>
+    <line x1="40" y1="16" x2="62" y2="28" stroke="#5ba3ff" stroke-width="0.8" opacity="0.4"/>
+    <line x1="40" y1="40" x2="62" y2="28" stroke="#5ba3ff" stroke-width="1.4" opacity="0.8"/>
+    <line x1="40" y1="40" x2="62" y2="52" stroke="#5ba3ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="40" y1="64" x2="62" y2="52" stroke="#5ba3ff" stroke-width="1.2" opacity="0.7"/>
+    <circle cx="18" cy="20" r="5" fill="#1a3a6e" stroke="#3a7bdf" stroke-width="1"/>
+    <circle cx="18" cy="40" r="5" fill="#1a4aae" stroke="#1a6bff" stroke-width="1.5"/>
+    <circle cx="18" cy="60" r="5" fill="#1a3a6e" stroke="#3a7bdf" stroke-width="1"/>
+    <circle cx="40" cy="16" r="5" fill="#0d2a5e" stroke="#3a7bdf" stroke-width="1"/>
+    <circle cx="40" cy="40" r="7" fill="#1a4aae" stroke="#5ba3ff" stroke-width="2"/>
+    <circle cx="40" cy="64" r="5" fill="#1a3a6e" stroke="#3a7bdf" stroke-width="1"/>
+    <circle cx="62" cy="28" r="5" fill="#1a3a6e" stroke="#3a7bdf" stroke-width="1"/>
+    <circle cx="62" cy="52" r="6" fill="#1a5abf" stroke="#5ba3ff" stroke-width="1.5"/>
+    <circle cx="40" cy="40" r="11" fill="none" stroke="#1a6bff" stroke-width="0.5" opacity="0.4"/>
+  </g>
+
+  <text x="124" y="64" class="wm-name">Sami <tspan class="wm-accent">S</tspan>amim</text>
+  <text x="124" y="90" class="wm-sub">ml · ai · data science</text>
+</svg>
