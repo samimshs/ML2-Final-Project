@@ -26,6 +26,14 @@ Use the `*-mac.dmg` file for your app.
 3. Drag the app into the **Applications** folder.
 4. Open the app from **Applications**.
 5. If macOS blocks the app because it is from an unidentified developer, right-click the app, choose **Open**, then confirm **Open**.
+6. If macOS says the app is **damaged** and should be moved to Trash, keep the app in **Applications**, open Terminal, and run one of these commands:
+
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/MoneyMate.app
+   xattr -dr com.apple.quarantine /Applications/Daftarcha.app
+   ```
+
+   Then open the app again from **Applications**.
 
 ## Passwords and Local Data
 
@@ -35,7 +43,7 @@ Daftarcha stores its business data locally in the app/browser storage. If you us
 
 ## Security Notice
 
-These builds are not code-signed yet. Windows and macOS may show security warnings on first install. This does not mean the app is broken; it means the operating system cannot verify the publisher identity yet.
+These builds are not code-signed yet. Windows and macOS may show security warnings on first install. macOS may also show a "damaged" warning after browser download because the app is quarantined and not notarized. This does not mean the app is broken; it means the operating system cannot verify the publisher identity yet.
 
 The long-term fix is code signing:
 

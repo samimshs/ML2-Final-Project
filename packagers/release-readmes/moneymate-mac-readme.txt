@@ -11,8 +11,17 @@ Install steps:
 3. Open MoneyMate from Applications.
 4. If macOS says Apple cannot verify the app, right-click MoneyMate, choose Open, then confirm Open.
 
+If macOS says "MoneyMate is damaged":
+1. Make sure MoneyMate is already in the Applications folder.
+2. Open Terminal.
+3. Run this command exactly:
+
+   xattr -dr com.apple.quarantine /Applications/MoneyMate.app
+
+4. Open MoneyMate again from Applications.
+
 Password:
 MoneyMate does not ship with a preset password. Create your own local account and password when you first open the app. You can change the password later in Settings.
 
 Note:
-This build is not Apple notarized yet, so macOS may show a security warning. MoneyMate stores your data locally on your computer. If you need help, contact samimshs@gmail.com.
+This build is not Apple notarized yet, so macOS may show a security warning or a "damaged" warning after Chrome downloads it. The long-term fix is Apple Developer ID signing and notarization. MoneyMate stores your data locally on your computer. If you need help, contact samimshs@gmail.com.
