@@ -102,7 +102,7 @@ a {
 
 .glass-tabs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  grid-template-columns: repeat(5, minmax(128px, 1fr));
   gap: 12px;
   width: min(760px, 100%);
   padding: 10px;
@@ -136,14 +136,18 @@ a {
 }
 
 .glass-tabs a:nth-child(2) svg {
-  color: #34a853;
+  color: #7c3aed;
 }
 
 .glass-tabs a:nth-child(3) svg {
-  color: #fbbc05;
+  color: #34a853;
 }
 
 .glass-tabs a:nth-child(4) svg {
+  color: #fbbc05;
+}
+
+.glass-tabs a:nth-child(5) svg {
   color: #ea4335;
 }
 
@@ -260,6 +264,11 @@ a {
 .project-row-icon.guide-icon {
   background: rgba(100, 116, 139, 0.12);
   color: #475569;
+}
+
+.project-row-icon.education-icon {
+  background: rgba(124, 58, 237, 0.12);
+  color: #6d28d9;
 }
 
 .download-row {
