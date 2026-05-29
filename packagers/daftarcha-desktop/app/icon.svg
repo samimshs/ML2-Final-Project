@@ -1,6 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#1f7a5a"/>
-  <rect x="112" y="88" width="288" height="336" rx="34" fill="#fffaf0"/>
-  <path d="M162 174h188M162 242h188M162 310h118" stroke="#1f7a5a" stroke-width="32" stroke-linecap="round"/>
-  <path d="M328 342l34 34 58-74" stroke="#c65f3d" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Daftarcha</title>
+  <desc id="desc">A smart store and ledger mark for Daftarcha.</desc>
+  <rect width="1024" height="1024" rx="224" fill="#111827"/>
+  <path d="M238 396h548v330c0 48-39 87-87 87H325c-48 0-87-39-87-87V396Z" fill="#F9FAFB"/>
+  <path d="M292 234h440l74 162H218l74-162Z" fill="#14B8A6"/>
+  <path d="M268 396v-92h120v92H268Zm184 0v-92h120v92H452Zm184 0v-92h120v92H636Z" fill="#10B981"/>
+  <rect x="314" y="502" width="396" height="34" rx="17" fill="#D1D5DB"/>
+  <rect x="314" y="590" width="324" height="30" rx="15" fill="#D1D5DB"/>
+  <rect x="314" y="674" width="236" height="30" rx="15" fill="#D1D5DB"/>
+  <path d="M700 546h70M735 511v70" stroke="#F59E0B" stroke-width="26" stroke-linecap="round"/>
+  <path d="M690 234c0 44-36 80-80 80 44 0 80 36 80 80 0-44 36-80 80-80-44 0-80-36-80-80Z" fill="#F59E0B"/>
 </svg>

@@ -1,20 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-  <defs>
-    <linearGradient id="bg" x1="156" y1="92" x2="888" y2="924" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1f7a5a"/>
-      <stop offset="1" stop-color="#f59e0b"/>
-    </linearGradient>
-    <linearGradient id="paper" x1="294" y1="230" x2="746" y2="824" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#fff7ed"/>
-      <stop offset="1" stop-color="#fed7aa"/>
-    </linearGradient>
-  </defs>
-  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
-  <path d="M214 392 324 252h376l110 140v88H214v-88Z" fill="#fffbeb"/>
-  <path d="M250 480h524v290c0 44-36 80-80 80H330c-44 0-80-36-80-80V480Z" fill="#064e3b" opacity=".24"/>
-  <path d="M304 446h416v354c0 36-29 66-66 66H370c-36 0-66-29-66-66V446Z" fill="url(#paper)"/>
-  <path d="M214 392h596v68c0 49-40 88-88 88-38 0-70-24-83-57-13 33-45 57-83 57s-70-24-83-57c-13 33-45 57-83 57s-70-24-83-57c-13 33-45 57-83 57-49 0-88-40-88-88v-68Z" fill="#f97316"/>
-  <path d="M356 620h312" stroke="#14532d" stroke-width="52" stroke-linecap="round"/>
-  <path d="M356 724h206" stroke="#14532d" stroke-width="52" stroke-linecap="round"/>
-  <circle cx="658" cy="724" r="40" fill="#f59e0b"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Daftarcha</title>
+  <desc id="desc">A smart store and ledger mark for Daftarcha.</desc>
+  <rect width="1024" height="1024" rx="224" fill="#111827"/>
+  <path d="M238 396h548v330c0 48-39 87-87 87H325c-48 0-87-39-87-87V396Z" fill="#F9FAFB"/>
+  <path d="M292 234h440l74 162H218l74-162Z" fill="#14B8A6"/>
+  <path d="M268 396v-92h120v92H268Zm184 0v-92h120v92H452Zm184 0v-92h120v92H636Z" fill="#10B981"/>
+  <rect x="314" y="502" width="396" height="34" rx="17" fill="#D1D5DB"/>
+  <rect x="314" y="590" width="324" height="30" rx="15" fill="#D1D5DB"/>
+  <rect x="314" y="674" width="236" height="30" rx="15" fill="#D1D5DB"/>
+  <path d="M700 546h70M735 511v70" stroke="#F59E0B" stroke-width="26" stroke-linecap="round"/>
+  <path d="M690 234c0 44-36 80-80 80 44 0 80 36 80 80 0-44 36-80 80-80-44 0-80-36-80-80Z" fill="#F59E0B"/>
 </svg>
