@@ -101,8 +101,8 @@ a {
 }
 
 .hero-logo {
-  width: clamp(420px, 70vw, 760px);
-  max-width: 800px;
+  width: min(90vw, 620px);
+  max-width: 620px;
   height: auto;
 }
 
