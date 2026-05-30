@@ -119,6 +119,7 @@ a {
   font-size: clamp(4.2rem, 8vw, 6rem);
   letter-spacing: -0.04em;
   line-height: 0.9;
+  transform: translateY(0.08em);
 }
 
 .hero-tagline {
