@@ -109,8 +109,8 @@ a {
 }
 
 .hero-icon {
-  width: 85px;
-  height: auto;
+  width: auto;
+  height: clamp(4.2rem, 8vw, 6rem);
   flex-shrink: 0;
 }
 
