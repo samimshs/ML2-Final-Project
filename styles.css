@@ -116,10 +116,10 @@ a {
 
 .hero-lockup h1 {
   margin: 0;
-  font-size: clamp(4.2rem, 8vw, 6rem);
+  font-size: clamp(4.5rem, 9vw, 6.5rem);
   letter-spacing: -0.04em;
   line-height: 0.9;
-  transform: translateY(0.08em);
+  transform: translateY(0.09em);
 }
 
 .hero-tagline {
