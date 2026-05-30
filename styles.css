@@ -100,6 +100,12 @@ a {
   line-height: 0.95;
 }
 
+.hero-logo {
+  width: clamp(420px, 70vw, 760px);
+  max-width: 800px;
+  height: auto;
+}
+
 .glass-tabs {
   display: grid;
   grid-template-columns: repeat(5, minmax(128px, 1fr));
