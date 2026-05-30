@@ -100,10 +100,33 @@ a {
   line-height: 0.95;
 }
 
-.hero-logo {
-  width: min(90vw, 620px);
-  max-width: 620px;
+.hero-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-icon {
+  width: 64px;
   height: auto;
+  flex-shrink: 0;
+}
+
+.hero-lockup h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 5.4rem);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.hero-tagline {
+  margin: 0.2rem 0 0;
+  font-size: 0.96rem;
+  color: #5f6f82;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .glass-tabs {
