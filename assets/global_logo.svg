@@ -1,8 +1,8 @@
-<svg width="520" height="112" viewBox="0 0 520 112" xmlns="http://www.w3.org/2000/svg" role="img">
+<svg width="460" height="108" viewBox="0 0 460 108" xmlns="http://www.w3.org/2000/svg" role="img">
   <title>KabulHub Logo</title>
-  <desc>KabulHub full logo — neural hub icon with system fonts</desc>
+  <desc>KabulHub full logo — tight crop, no whitespace</desc>
 
-  <!-- Icon scaled to match cap-height of wordmark -->
+  <!-- Icon: 180x180 scaled to 56x56, top at y=20 -->
   <g transform="translate(0, 20) scale(0.311)">
     <rect x="0" y="0" width="180" height="180" rx="36" fill="#0A0F1E"/>
     <line x1="90" y1="90" x2="90"  y2="22"  stroke="#2563EB" stroke-width="1.5" opacity="0.55"/>
@@ -42,7 +42,7 @@
   </g>
 
   <!-- Divider -->
-  <line x1="70" y1="18" x2="70" y2="82" stroke="#1E3A6E" stroke-width="1" opacity="0.5"/>
+  <line x1="70" y1="22" x2="70" y2="76" stroke="#1E3A6E" stroke-width="1" opacity="0.5"/>
 
   <!-- Wordmark -->
   <text
@@ -55,7 +55,7 @@
     fill="#0A0F1E"
   >Kabul<tspan fill="#2563EB">Hub</tspan></text>
 
-  <!-- Tagline: font-size 14, textLength locked to wordmark width -->
+  <!-- Tagline -->
   <text
     x="82"
     y="104"
