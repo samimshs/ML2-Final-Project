@@ -52,6 +52,18 @@ a {
   color: inherit;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .home-page,
 .directory-page {
   background:
@@ -112,6 +124,12 @@ a {
   width: auto;
   height: clamp(3rem, 6vw, 4.5rem);
   flex-shrink: 0;
+}
+
+.hero-logo {
+  display: block;
+  width: min(720px, 100%);
+  height: auto;
 }
 
 .hero-lockup h1 {
