@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "PUBLIC_HOLDING_PAGE=1 npm run build"
   publish = ".next"
 
 [[headers]]
@@ -18,3 +18,8 @@
   for = "/assets/audio/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

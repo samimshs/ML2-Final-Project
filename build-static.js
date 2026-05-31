@@ -3,10 +3,12 @@ const path = require("path");
 
 const root = __dirname;
 const outDir = path.join(root, ".next");
+const publishHoldingPage = process.env.PUBLIC_HOLDING_PAGE === "1";
 
-const copyTargets = [
+const localReviewTargets = [
   "index.html",
   "machine-learning.html",
+  "education.html",
   "softwares.html",
   "data.html",
   "others.html",
@@ -20,6 +22,15 @@ const copyTargets = [
   "README.md",
   "netlify.toml",
 ];
+
+const holdingPageTargets = [
+  "coming-soon.html",
+  "styles.css",
+  "assets",
+  "netlify.toml",
+];
+
+const copyTargets = publishHoldingPage ? holdingPageTargets : localReviewTargets;
 
 fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
@@ -35,4 +46,9 @@ for (const target of copyTargets) {
   fs.cpSync(source, destination, { recursive: true });
 }
 
-console.log("Static site copied to .next");
+if (publishHoldingPage) {
+  fs.copyFileSync(path.join(outDir, "coming-soon.html"), path.join(outDir, "index.html"));
+  fs.rmSync(path.join(outDir, "coming-soon.html"), { force: true });
+}
+
+console.log(`Static site copied to .next (${publishHoldingPage ? "holding page" : "local review site"})`);
