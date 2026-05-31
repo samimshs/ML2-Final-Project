@@ -1,0 +1,38 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>KabulHub Icon — Light Background</title>
+  <rect width="400" height="400" rx="88" fill="#0A0F1E"/>
+  <line x1="200" y1="200" x2="200" y2="62"  stroke="#2563EB" stroke-width="2" opacity="0.55"/>
+  <line x1="200" y1="200" x2="331" y2="106" stroke="#2563EB" stroke-width="2" opacity="0.55"/>
+  <line x1="200" y1="200" x2="348" y2="248" stroke="#2563EB" stroke-width="2" opacity="0.55"/>
+  <line x1="200" y1="200" x2="272" y2="348" stroke="#2563EB" stroke-width="2" opacity="0.55"/>
+  <line x1="200" y1="200" x2="128" y2="348" stroke="#2563EB" stroke-width="2" opacity="0.45"/>
+  <line x1="200" y1="200" x2="52"  y2="248" stroke="#2563EB" stroke-width="2" opacity="0.45"/>
+  <line x1="200" y1="200" x2="69"  y2="106" stroke="#2563EB" stroke-width="2" opacity="0.45"/>
+  <line x1="200" y1="62"  x2="331" y2="106" stroke="#3B82F6" stroke-width="1" opacity="0.18"/>
+  <line x1="331" y1="106" x2="348" y2="248" stroke="#3B82F6" stroke-width="1" opacity="0.18"/>
+  <line x1="348" y1="248" x2="272" y2="348" stroke="#3B82F6" stroke-width="1" opacity="0.18"/>
+  <line x1="272" y1="348" x2="128" y2="348" stroke="#3B82F6" stroke-width="1" opacity="0.15"/>
+  <line x1="128" y1="348" x2="52"  y2="248" stroke="#3B82F6" stroke-width="1" opacity="0.15"/>
+  <line x1="52"  y1="248" x2="69"  y2="106" stroke="#3B82F6" stroke-width="1" opacity="0.15"/>
+  <line x1="69"  y1="106" x2="200" y2="62"  stroke="#3B82F6" stroke-width="1" opacity="0.18"/>
+  <circle cx="200" cy="200" r="138" fill="none" stroke="#1D4ED8" stroke-width="1" opacity="0.2"/>
+  <circle cx="200" cy="62"  r="14" fill="#1D4ED8" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="331" cy="106" r="12" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="348" cy="248" r="14" fill="#1D4ED8" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="272" cy="348" r="12" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.85"/>
+  <circle cx="128" cy="348" r="11" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.75"/>
+  <circle cx="52"  cy="248" r="12" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="69"  cy="106" r="11" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.75"/>
+  <circle cx="200" cy="62"  r="6"  fill="#60A5FA" opacity="0.9"/>
+  <circle cx="331" cy="106" r="5"  fill="#60A5FA" opacity="0.7"/>
+  <circle cx="348" cy="248" r="6"  fill="#60A5FA" opacity="0.9"/>
+  <circle cx="272" cy="348" r="5"  fill="#60A5FA" opacity="0.65"/>
+  <circle cx="128" cy="348" r="4.5" fill="#60A5FA" opacity="0.6"/>
+  <circle cx="52"  cy="248" r="5"  fill="#60A5FA" opacity="0.65"/>
+  <circle cx="69"  cy="106" r="4.5" fill="#60A5FA" opacity="0.6"/>
+  <circle cx="200" cy="200" r="52" fill="none" stroke="#2563EB" stroke-width="1.5" opacity="0.2"/>
+  <circle cx="200" cy="200" r="36" fill="none" stroke="#2563EB" stroke-width="1"   opacity="0.3"/>
+  <circle cx="200" cy="200" r="28" fill="#1D4ED8"/>
+  <circle cx="200" cy="200" r="17" fill="#3B82F6"/>
+  <circle cx="200" cy="200" r="9"  fill="#93C5FD"/>
+</svg>

@@ -4,48 +4,450 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f7f8fb">
-    <meta name="description" content="Sami's portfolio of machine learning, education, software, data, and other projects.">
-    <title>Sami Samim | Projects</title>
-    <link rel="icon" href="/assets/global_icon.svg" type="image/svg+xml">
+    <meta name="description" content="KabulHub transforms information into understanding through research, data science, software, and intelligent systems.">
+    <meta property="og:title" content="KabulHub | Research, Data, and Technology">
+    <meta property="og:description" content="Research-grade software, data products, and intelligent systems for better decisions.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/branding/04-logo-horizontal-light.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>KabulHub | Research, Data, and Technology</title>
+    <link rel="icon" href="assets/branding/11-favicon-32.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://unpkg.com">
     <link rel="stylesheet" href="styles.css">
     <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => {
         if (window.lucide) window.lucide.createIcons();
+
+        document.querySelectorAll("[data-spotlight-grid]").forEach((grid) => {
+          const cards = Array.from(grid.querySelectorAll(".spotlight-tile"));
+
+          const updateSpotlight = (event) => {
+            const gridRect = grid.getBoundingClientRect();
+            grid.style.setProperty("--mouse-x", `${event.clientX - gridRect.left}px`);
+            grid.style.setProperty("--mouse-y", `${event.clientY - gridRect.top}px`);
+
+            cards.forEach((card) => {
+              const cardRect = card.getBoundingClientRect();
+              card.style.setProperty("--card-mouse-x", `${event.clientX - cardRect.left}px`);
+              card.style.setProperty("--card-mouse-y", `${event.clientY - cardRect.top}px`);
+            });
+          };
+
+          grid.addEventListener("mousemove", updateSpotlight);
+          grid.addEventListener("mouseleave", () => {
+            grid.style.removeProperty("--mouse-x");
+            grid.style.removeProperty("--mouse-y");
+          });
+        });
+
+        document.querySelectorAll("[data-tilt]").forEach((panel) => {
+          panel.addEventListener("mousemove", (event) => {
+            const rect = panel.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - 0.5;
+            const y = (event.clientY - rect.top) / rect.height - 0.5;
+            panel.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
+            panel.style.setProperty("--tilt-y", `${(x * 4).toFixed(2)}deg`);
+          });
+
+          panel.addEventListener("mouseleave", () => {
+            panel.style.removeProperty("--tilt-x");
+            panel.style.removeProperty("--tilt-y");
+          });
+        });
+
+        const revealItems = document.querySelectorAll("[data-reveal]");
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: "0px 0px -18% 0px", threshold: 0.08 });
+
+          revealItems.forEach((item) => revealObserver.observe(item));
+        } else {
+          revealItems.forEach((item) => item.classList.add("is-visible"));
+        }
+
+        const slowFinish = (t) => 1 - Math.pow(1 - t, 3);
+
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+          link.addEventListener("click", (event) => {
+            const target = document.querySelector(link.getAttribute("href"));
+            if (!target) return;
+
+            event.preventDefault();
+
+            const startY = window.scrollY;
+            const headerOffset = document.querySelector(".home-header")?.offsetHeight || 0;
+            const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset - 18;
+            const distance = targetY - startY;
+            const duration = 700;
+            let startTime = null;
+            const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+            document.documentElement.style.scrollBehavior = "auto";
+
+            const step = (timestamp) => {
+              if (!startTime) startTime = timestamp;
+              const progress = Math.min((timestamp - startTime) / duration, 1);
+              window.scrollTo(0, startY + distance * slowFinish(progress));
+
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                document.documentElement.style.scrollBehavior = previousScrollBehavior;
+                history.pushState(null, "", link.getAttribute("href"));
+              }
+            };
+
+            requestAnimationFrame(step);
+          });
+        });
+
+        const mobileToggle = document.querySelector(".nav-toggle");
+        const headerNav = document.querySelector(".header-nav");
+
+        mobileToggle?.addEventListener("click", () => {
+          const isOpen = headerNav.classList.toggle("is-open");
+          mobileToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        headerNav?.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            headerNav.classList.remove("is-open");
+            mobileToggle?.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        const navLinks = Array.from(document.querySelectorAll(".header-nav a[href^='#']"));
+        const navTargets = navLinks
+          .map((link) => document.querySelector(link.getAttribute("href")))
+          .filter(Boolean);
+
+        const activeObserver = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) return;
+
+          navLinks.forEach((link) => {
+            link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
+          });
+        }, { rootMargin: "-24% 0px -58% 0px", threshold: [0.1, 0.35, 0.6] });
+
+        navTargets.forEach((target) => activeObserver.observe(target));
       });
     </script>
   </head>
   <body class="home-page">
-    <main class="landing-shell" aria-label="Project categories">
-      <section class="landing-center">
-        <div class="hero-lockup">
-          <img class="hero-logo" src="/assets/global_logo.svg" alt="KabulHub">
-          <h1 class="sr-only">KabulHub</h1>
+    <header class="home-header">
+      <a class="header-logo" href="index.html" aria-label="KabulHub home">
+        <img src="assets/branding/06-logo-horizontal-transparent.svg" alt="KabulHub">
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+      <nav class="header-nav" aria-label="KabulHub navigation">
+        <a href="#home-title">Home</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="home-main">
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="hero-copy" data-reveal="item">
+          <p class="section-kicker">Research, Data, and Technology</p>
+          <h1 id="home-title">Transforming information into understanding.</h1>
+          <p>KabulHub builds software products, analytical frameworks, and intelligent systems that turn complexity into clarity.</p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#products">
+              <span>Explore products</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+            <a class="secondary-link" href="#about">About KabulHub</a>
+          </div>
         </div>
-        <nav class="glass-tabs" aria-label="Project categories">
-          <a href="machine-learning.html">
-            <i data-lucide="brain-circuit"></i>
-            <span>Machine Learning</span>
-          </a>
-          <a href="education.html">
-            <i data-lucide="graduation-cap"></i>
-            <span>Education</span>
-          </a>
-          <a href="softwares.html">
-            <i data-lucide="blocks"></i>
-            <span>Software</span>
-          </a>
-          <a href="data.html">
+        <div class="hero-panel" aria-hidden="true" data-reveal="item" data-tilt>
+          <div class="insight-orb">
+            <img src="assets/branding/03-icon-transparent.svg" alt="">
+          </div>
+          <div class="insight-card insight-card-primary">
+            <span>Understanding Engine</span>
+            <strong>Complexity → Clarity</strong>
+          </div>
+          <div class="insight-card">
             <i data-lucide="database"></i>
             <span>Data</span>
-          </a>
-          <a href="others.html">
-            <i data-lucide="sparkles"></i>
-            <span>Others</span>
-          </a>
-        </nav>
+          </div>
+          <div class="insight-card">
+            <i data-lucide="brain-circuit"></i>
+            <span>Knowledge</span>
+          </div>
+          <div class="insight-card">
+            <i data-lucide="compass"></i>
+            <span>Wisdom</span>
+          </div>
+          <div class="insight-card">
+            <i data-lucide="arrow-up-right"></i>
+            <span>Action</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-section" id="products" aria-labelledby="products-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">Products</p>
+          <h2 id="products-title">Choose a focus area.</h2>
+        </div>
+        <div class="product-grid" data-spotlight-grid>
+          <article class="product-card spotlight-tile" data-reveal="item">
+            <div class="product-card-heading">
+              <i data-lucide="brain-circuit"></i>
+              <span>Machine Learning</span>
+            </div>
+            <span class="product-status">Prototype</span>
+            <p>Models, experiments, and applied intelligence projects.</p>
+            <div class="product-preview">
+              <span>OcuState</span>
+              <small>Computer vision demo</small>
+            </div>
+            <a href="machine-learning.html">Open Machine Learning</a>
+          </article>
+          <article class="product-card spotlight-tile" data-reveal="item">
+            <div class="product-card-heading">
+              <i data-lucide="graduation-cap"></i>
+              <span>Education</span>
+            </div>
+            <span class="product-status">Coming soon</span>
+            <p>Learning tools and research-driven education projects.</p>
+            <div class="product-preview">
+              <span>PohaRana</span>
+              <small>Bilingual education MVP</small>
+            </div>
+            <a href="education.html">Open Education</a>
+          </article>
+          <article class="product-card spotlight-tile" data-reveal="item">
+            <div class="product-card-heading">
+              <i data-lucide="blocks"></i>
+              <span>Software Engineering</span>
+            </div>
+            <span class="product-status">Available</span>
+            <p>Useful applications, systems, and software experiments.</p>
+            <div class="product-preview product-preview-image">
+              <img src="assets/screenshots/daftarcha-dashboard.png" alt="">
+              <span>Daftarcha</span>
+            </div>
+            <a href="softwares.html">Open Software Engineering</a>
+          </article>
+          <article class="product-card spotlight-tile" data-reveal="item">
+            <div class="product-card-heading">
+              <i data-lucide="database"></i>
+              <span>Data Science</span>
+            </div>
+            <span class="product-status">Live</span>
+            <p>Data products, dashboards, and analytical frameworks.</p>
+            <div class="product-preview">
+              <span>DataHub</span>
+              <small>Global data explorer</small>
+            </div>
+            <a href="data.html">Open Data Science</a>
+          </article>
+          <article class="product-card spotlight-tile" data-reveal="item">
+            <div class="product-card-heading">
+              <i data-lucide="sparkles"></i>
+              <span>Labs</span>
+            </div>
+            <span class="product-status">Research</span>
+            <p>Additional experiments and ideas outside the main categories.</p>
+            <div class="product-preview">
+              <span>Research queue</span>
+              <small>Experiments and prototypes</small>
+            </div>
+            <a href="others.html">Open Labs</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section about-section" id="about" aria-labelledby="about-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">About</p>
+          <h2 id="about-title">Engineering clarity from raw data.</h2>
+        </div>
+        <div class="about-copy" data-reveal="item">
+          <p>KabulHub is a research, data, and technology company focused on transforming information into understanding.</p>
+          <p>We build software products, analytical frameworks, and intelligent systems that help individuals, organizations, and communities make better decisions. Our work spans data science, economics, machine learning, software engineering, and applied research, but our purpose extends beyond any particular technology.</p>
+          <p>Technology changes. Tools evolve. The need for deeper understanding remains.</p>
+          <p>KabulHub exists to bridge the gap between data and meaningful action by creating systems that turn complexity into clarity.</p>
+        </div>
+      </section>
+
+      <section class="content-section statements-section" aria-labelledby="statements-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">Vision & Mission</p>
+          <h2 id="statements-title">Why KabulHub exists.</h2>
+        </div>
+        <div class="statement-grid" aria-label="Vision and mission" data-spotlight-grid>
+          <article class="statement-panel spotlight-tile" id="vision" data-reveal="item">
+            <i data-lucide="telescope"></i>
+            <p class="section-kicker">Vision</p>
+            <h2>Advance human understanding.</h2>
+            <p>To advance human understanding by transforming data into knowledge, knowledge into wisdom, and wisdom into meaningful action.</p>
+          </article>
+          <article class="statement-panel spotlight-tile" id="mission" data-reveal="item">
+            <i data-lucide="compass"></i>
+            <p class="section-kicker">Mission</p>
+            <h2>Build tools for better decisions.</h2>
+            <p>To build products, systems, and research-driven solutions that help people better understand complex problems and make more informed decisions.</p>
+            <p>Through data science, technology, and evidence-based inquiry, we create tools that convert information into insight and insight into impact.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section values-section" id="values" aria-labelledby="values-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">Core Values</p>
+          <h2 id="values-title">Principles that keep the work honest.</h2>
+        </div>
+        <div class="spotlight-grid values-grid" data-spotlight-grid>
+          <article class="spotlight-card spotlight-tile" data-reveal="item">
+            <span>01</span>
+            <h3>Truth Over Assumption</h3>
+            <p>We seek evidence before conclusions.</p>
+          </article>
+          <article class="spotlight-card spotlight-tile" data-reveal="item">
+            <span>02</span>
+            <h3>Understanding Over Information</h3>
+            <p>Information alone is not enough. Our goal is meaningful understanding.</p>
+          </article>
+          <article class="spotlight-card spotlight-tile" data-reveal="item">
+            <span>03</span>
+            <h3>Simplicity Through Clarity</h3>
+            <p>Complex problems deserve clear explanations and elegant solutions.</p>
+          </article>
+          <article class="spotlight-card spotlight-tile" data-reveal="item">
+            <span>04</span>
+            <h3>Curiosity Without Boundaries</h3>
+            <p>Learning is a lifelong pursuit, and innovation begins with asking better questions.</p>
+          </article>
+          <article class="spotlight-card spotlight-tile" data-reveal="item">
+            <span>05</span>
+            <h3>Impact Over Activity</h3>
+            <p>The value of knowledge is measured by its ability to improve decisions and outcomes.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section focus-section" id="focus" aria-labelledby="focus-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">Focus</p>
+          <h2 id="focus-title">Research, systems, and applied intelligence.</h2>
+        </div>
+        <div class="focus-list" data-reveal="item">
+          <span>Data Science</span>
+          <span>Education</span>
+          <span>Machine Learning</span>
+          <span>Software Engineering</span>
+          <span>Labs</span>
+        </div>
+      </section>
+
+      <section class="content-section contact-section" id="contact" aria-labelledby="contact-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title">Start a conversation.</h2>
+        </div>
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" data-reveal="item">
+          <input type="hidden" name="form-name" value="contact">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span>Organization</span>
+            <input type="text" name="organization" autocomplete="organization">
+          </label>
+          <label>
+            <span>Area of interest</span>
+            <select name="interest" required>
+              <option value="">Select one</option>
+              <option>Data Science</option>
+              <option>Education</option>
+              <option>Machine Learning</option>
+              <option>Software Engineering</option>
+              <option>Labs</option>
+            </select>
+          </label>
+          <label>
+            <span>Timeline</span>
+            <select name="timeline">
+              <option value="">Select one</option>
+              <option>Immediately</option>
+              <option>1-3 months</option>
+              <option>3-6 months</option>
+              <option>Exploring</option>
+            </select>
+          </label>
+          <label class="form-wide">
+            <span>Message</span>
+            <textarea name="message" rows="6" placeholder="Tell us what you are trying to understand, build, or improve." required></textarea>
+          </label>
+          <button class="primary-link form-submit" type="submit">
+            <span>Send message</span>
+            <i data-lucide="send"></i>
+          </button>
+        </form>
       </section>
     </main>
+    <footer class="site-footer">
+      <div>
+        <img src="assets/branding/06-logo-horizontal-transparent.svg" alt="KabulHub">
+        <p>Research, data, and technology for meaningful understanding.</p>
+      </div>
+      <div class="footer-right">
+        <address class="footer-contact">
+          <a href="mailto:info@kabulhub.com">info@kabulhub.com</a>
+          <span>Chicago, IL</span>
+          <span class="social-links" aria-label="Social media">
+            <a href="#" aria-label="X">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M13.74 10.16 21.16 2h-1.76l-6.44 7.08L7.82 2H1.88l7.78 10.71L1.88 21.25h1.76l6.8-7.47 5.43 7.47h5.94l-8.07-11.09Zm-2.41 2.65-.79-1.07L4.27 3.33h2.7l5.06 6.79.79 1.07 6.58 8.83h-2.7l-5.37-7.21Z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 8.5V6.75c0-.49.39-.88.88-.88H17V2h-3.13A4.87 4.87 0 0 0 9 6.87V8.5H6v4h3V22h5v-9.5h3.25l.75-4H14Z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.6 2c.34 2.39 1.68 3.82 4.02 3.98v4.08a7.48 7.48 0 0 1-4.02-1.23v6.12c0 4.3-3.09 7.05-6.82 7.05A6.43 6.43 0 0 1 3.4 15.55c0-4.04 3.34-7.08 7.5-6.42v4.2a2.44 2.44 0 1 0 1.72 2.33V2h3.98Z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.96-1.96C18.86 4 12 4 12 4s-6.86 0-8.58.46a2.78 2.78 0 0 0-1.96 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.96 1.96C5.14 20 12 20 12 20s6.86 0 8.58-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM9.75 15.27V8.73L15.5 12l-5.75 3.27Z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7.25A4.75 4.75 0 1 1 12 16.75 4.75 4.75 0 0 1 12 7.25Zm0 2A2.75 2.75 0 1 0 12 14.75 2.75 2.75 0 0 0 12 9.25Zm5-2.38a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26Z"/>
+              </svg>
+            </a>
+          </span>
+        </address>
+        <p>© 2026 KabulHub LLC. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>
