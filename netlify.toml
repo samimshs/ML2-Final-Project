@@ -1,5 +1,5 @@
 [build]
-  command = "PUBLIC_HOLDING_PAGE=1 npm run build"
+  command = "npm run build"
   publish = ".next"
 
 [[headers]]

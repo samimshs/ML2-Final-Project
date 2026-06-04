@@ -7,6 +7,7 @@ const publishHoldingPage = process.env.PUBLIC_HOLDING_PAGE === "1";
 
 const localReviewTargets = [
   "index.html",
+  "coming-soon.html",
   "machine-learning.html",
   "education.html",
   "softwares.html",
@@ -51,4 +52,4 @@ if (publishHoldingPage) {
   fs.rmSync(path.join(outDir, "coming-soon.html"), { force: true });
 }
 
-console.log(`Static site copied to .next (${publishHoldingPage ? "holding page" : "local review site"})`);
+console.log(`Static site copied to .next (${publishHoldingPage ? "holding page" : "main site"})`);
