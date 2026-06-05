@@ -4070,6 +4070,39 @@ body.product-expanded-open {
     linear-gradient(-28deg, transparent 0 46%, rgba(255, 255, 255, 0.16) 47% 49%, transparent 50%);
 }
 
+/* Uploaded product thumbnail images. */
+.product-section .product-card-ml .product-thumb,
+.product-expanded-card.product-card-ml .product-expanded-hero {
+  background: url("assets/product-thumbnails/machine-learning-ai.png") center / cover no-repeat;
+}
+
+.product-section .product-card-education .product-thumb,
+.product-expanded-card.product-card-education .product-expanded-hero {
+  background: url("assets/product-thumbnails/education.png") center / cover no-repeat;
+}
+
+.product-section .product-card-software .product-thumb,
+.product-expanded-card.product-card-software .product-expanded-hero {
+  background: url("assets/product-thumbnails/software.png") center / cover no-repeat;
+}
+
+.product-section .product-card-data .product-thumb,
+.product-expanded-card.product-card-data .product-expanded-hero {
+  background: url("assets/product-thumbnails/data.png") center / cover no-repeat;
+}
+
+.product-section .product-card-labs .product-thumb,
+.product-expanded-card.product-card-labs .product-expanded-hero {
+  background: url("assets/product-thumbnails/labs.png") center / cover no-repeat;
+}
+
+.product-section .product-thumb::before,
+.product-expanded-hero::before,
+.product-expanded-hero::after,
+.product-section .product-thumb span {
+  display: none;
+}
+
 .product-expanded-hero::after {
   right: auto;
   bottom: 24px;
