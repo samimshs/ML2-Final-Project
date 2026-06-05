@@ -3960,7 +3960,7 @@ body.product-expanded-open {
   inset: clamp(16px, 4vw, 48px) 0;
   z-index: 79;
   display: grid;
-  grid-template-rows: 110px minmax(0, 1fr);
+  grid-template-rows: min(312px, calc((100vw - 32px) * 0.4)) minmax(0, 1fr);
   width: min(780px, calc(100vw - 32px));
   height: min(690px, calc(100vh - 32px));
   max-height: calc(100vh - 32px);
@@ -4001,7 +4001,7 @@ body.product-expanded-open {
 
 .product-expanded-hero {
   position: relative;
-  min-height: 110px;
+  min-height: min(312px, calc((100vw - 32px) * 0.4));
   overflow: hidden;
   background: linear-gradient(135deg, #2563eb 0%, #0f766e 100%);
 }
@@ -4073,27 +4073,27 @@ body.product-expanded-open {
 /* Uploaded product thumbnail images. */
 .product-section .product-card-ml .product-thumb,
 .product-expanded-card.product-card-ml .product-expanded-hero {
-  background: url("assets/product-thumbnails/machine-learning-ai.png") center / cover no-repeat;
+  background: url("assets/product-thumbnails/machine-learning-ai.png") center / contain no-repeat;
 }
 
 .product-section .product-card-education .product-thumb,
 .product-expanded-card.product-card-education .product-expanded-hero {
-  background: url("assets/product-thumbnails/education.png") center / cover no-repeat;
+  background: url("assets/product-thumbnails/education.png") center / contain no-repeat;
 }
 
 .product-section .product-card-software .product-thumb,
 .product-expanded-card.product-card-software .product-expanded-hero {
-  background: url("assets/product-thumbnails/software.png") center / cover no-repeat;
+  background: url("assets/product-thumbnails/software.png") center / contain no-repeat;
 }
 
 .product-section .product-card-data .product-thumb,
 .product-expanded-card.product-card-data .product-expanded-hero {
-  background: url("assets/product-thumbnails/data.png") center / cover no-repeat;
+  background: url("assets/product-thumbnails/data.png") center / contain no-repeat;
 }
 
 .product-section .product-card-labs .product-thumb,
 .product-expanded-card.product-card-labs .product-expanded-hero {
-  background: url("assets/product-thumbnails/labs.png") center / cover no-repeat;
+  background: url("assets/product-thumbnails/labs.png") center / contain no-repeat;
 }
 
 .product-section .product-thumb::before,
