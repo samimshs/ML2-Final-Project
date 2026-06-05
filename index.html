@@ -15,6 +15,17 @@
     <link rel="preconnect" href="https://unpkg.com">
     <link rel="stylesheet" href="styles.css?v=products-education-copy-20260604">
     <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client"
+        }
+      }
+    </script>
+    <script type="module" src="product-expander.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", () => {
         if (window.lucide) window.lucide.createIcons();
@@ -362,87 +373,89 @@
           <p class="section-kicker">Products</p>
           <h2 id="products-title">Choose a focus area.</h2>
         </div>
-        <div class="product-grid" data-spotlight-grid>
-          <article class="product-card product-card-ml spotlight-tile" data-reveal="item">
-            <div class="product-thumb" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="product-card-heading">
-              <i data-lucide="brain-circuit"></i>
-              <span>Machine Learning &amp; AI</span>
-            </div>
-            <div class="product-tags">
-              <span class="product-status product-status-primary">Prototype</span>
-              <span class="product-status">Models</span>
-            </div>
-            <p>Applied models, experiments, and intelligent systems.</p>
-            <small class="product-stat">OCUSTATE · COMPUTER VISION · DEMOS</small>
-            <a href="machine-learning.html">View products</a>
-          </article>
-          <article class="product-card product-card-education spotlight-tile" data-reveal="item">
-            <div class="product-thumb" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="product-card-heading">
-              <i data-lucide="graduation-cap"></i>
-              <span>Education</span>
-            </div>
-            <div class="product-tags">
-              <span class="product-status product-status-green">Live</span>
-              <span class="product-status product-status-purple">Education</span>
-            </div>
-            <p>KabulLearn delivers trilingual courses, guided quizzes, and verified certificates.</p>
-            <small class="product-stat">KABULLEARN · COURSES · CERTIFICATES</small>
-            <a href="education.html">View products</a>
-          </article>
-          <article class="product-card product-card-software spotlight-tile" data-reveal="item">
-            <div class="product-thumb" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="product-card-heading">
-              <i data-lucide="blocks"></i>
-              <span>Software</span>
-            </div>
-            <div class="product-tags">
-              <span class="product-status product-status-primary">Available</span>
-              <span class="product-status">Apps</span>
-            </div>
-            <p>Practical applications, systems, and product prototypes.</p>
-            <small class="product-stat">TOOLS · SYSTEMS · PROTOTYPES</small>
-            <a href="softwares.html">View products</a>
-          </article>
-          <article class="product-card product-card-data spotlight-tile" data-reveal="item">
-            <div class="product-thumb" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="product-card-heading">
-              <i data-lucide="database"></i>
-              <span>Data</span>
-            </div>
-            <div class="product-tags">
-              <span class="product-status product-status-green">Live</span>
-              <span class="product-status">Analytics</span>
-            </div>
-            <p>Dashboards, data products, and analytical frameworks.</p>
-            <small class="product-stat">DASHBOARDS · DATA · INSIGHTS</small>
-            <a href="data.html">View products</a>
-          </article>
-          <article class="product-card product-card-labs spotlight-tile" data-reveal="item">
-            <div class="product-thumb" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="product-card-heading">
-              <i data-lucide="sparkles"></i>
-              <span>Labs</span>
-            </div>
-            <div class="product-tags">
-              <span class="product-status product-status-warm">Research</span>
-              <span class="product-status">Ideas</span>
-            </div>
-            <p>Research ideas and experiments beyond the main categories.</p>
-            <small class="product-stat">EXPERIMENTS · NOTES · CONCEPTS</small>
-            <a href="others.html">View products</a>
-          </article>
+        <div id="product-expander-root">
+          <div class="product-grid" data-spotlight-grid>
+            <article class="product-card product-card-ml spotlight-tile is-visible" data-reveal="item">
+              <div class="product-thumb" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="product-card-heading">
+                <i data-lucide="brain-circuit"></i>
+                <span>Machine Learning &amp; AI</span>
+              </div>
+              <div class="product-tags">
+                <span class="product-status product-status-primary">Prototype</span>
+                <span class="product-status">Models</span>
+              </div>
+              <p>Applied models, experiments, and intelligent systems.</p>
+              <small class="product-stat">OCUSTATE · COMPUTER VISION · DEMOS</small>
+              <a href="machine-learning.html">View products</a>
+            </article>
+            <article class="product-card product-card-education spotlight-tile is-visible" data-reveal="item">
+              <div class="product-thumb" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="product-card-heading">
+                <i data-lucide="graduation-cap"></i>
+                <span>Education</span>
+              </div>
+              <div class="product-tags">
+                <span class="product-status product-status-green">Live</span>
+                <span class="product-status product-status-purple">Education</span>
+              </div>
+              <p>KabulLearn delivers trilingual courses, guided quizzes, and verified certificates.</p>
+              <small class="product-stat">KABULLEARN · COURSES · CERTIFICATES</small>
+              <a href="education.html">View products</a>
+            </article>
+            <article class="product-card product-card-software spotlight-tile is-visible" data-reveal="item">
+              <div class="product-thumb" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="product-card-heading">
+                <i data-lucide="blocks"></i>
+                <span>Software</span>
+              </div>
+              <div class="product-tags">
+                <span class="product-status product-status-primary">Available</span>
+                <span class="product-status">Apps</span>
+              </div>
+              <p>Practical applications, systems, and product prototypes.</p>
+              <small class="product-stat">TOOLS · SYSTEMS · PROTOTYPES</small>
+              <a href="softwares.html">View products</a>
+            </article>
+            <article class="product-card product-card-data spotlight-tile is-visible" data-reveal="item">
+              <div class="product-thumb" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="product-card-heading">
+                <i data-lucide="database"></i>
+                <span>Data</span>
+              </div>
+              <div class="product-tags">
+                <span class="product-status product-status-green">Live</span>
+                <span class="product-status">Analytics</span>
+              </div>
+              <p>Dashboards, data products, and analytical frameworks.</p>
+              <small class="product-stat">DASHBOARDS · DATA · INSIGHTS</small>
+              <a href="data.html">View products</a>
+            </article>
+            <article class="product-card product-card-labs spotlight-tile is-visible" data-reveal="item">
+              <div class="product-thumb" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="product-card-heading">
+                <i data-lucide="sparkles"></i>
+                <span>Labs</span>
+              </div>
+              <div class="product-tags">
+                <span class="product-status product-status-warm">Research</span>
+                <span class="product-status">Ideas</span>
+              </div>
+              <p>Research ideas and experiments beyond the main categories.</p>
+              <small class="product-stat">EXPERIMENTS · NOTES · CONCEPTS</small>
+              <a href="others.html">View products</a>
+            </article>
+          </div>
         </div>
       </section>
 

@@ -1,0 +1,78 @@
+{
+  "ml": [
+    {
+      "id": "ocustate",
+      "name": "OcuState Computer Vision",
+      "status": "Prototype",
+      "description": "Real-time drowsiness detection with TensorFlow.js and MediaPipe FaceMesh.",
+      "detail": "A browser-based machine learning demo that tracks eye and face signals to estimate alertness in real time.",
+      "href": "ocustate.html",
+      "action": "Open demo",
+      "icon": "eye",
+      "external": true
+    }
+  ],
+  "education": [
+    {
+      "id": "kabullearn",
+      "name": "KabulLearn",
+      "status": "Live",
+      "description": "A trilingual Afghan learning platform with structured course pathways, quizzes, and certificates.",
+      "detail": "KabulLearn supports accessible learning in English, Dari, and Pashto with guided lessons, required checkpoints, and verified certificates.",
+      "href": "https://www.kabullearn.com",
+      "action": "Open website",
+      "icon": "book-open-check",
+      "external": true
+    }
+  ],
+  "software": [
+    {
+      "id": "daftarcha",
+      "name": "Daftarcha",
+      "status": "Available",
+      "description": "Offline-first business management app for inventory, sales, debts, reports, and AI assistance.",
+      "detail": "Designed for small businesses that need local-first operations, practical reporting, and simple inventory workflows.",
+      "href": "softwares.html",
+      "action": "View details",
+      "icon": "package-check",
+      "external": false
+    },
+    {
+      "id": "moneymate",
+      "name": "MoneyMate",
+      "status": "Available",
+      "description": "Personal finance desktop app for assets, expenses, ledgers, zakat tracking, and protected local accounts.",
+      "detail": "A local desktop finance tool for tracking net worth, accounts, expenses, asset allocation, and financial records.",
+      "href": "softwares.html",
+      "action": "View details",
+      "icon": "wallet-cards",
+      "external": false
+    }
+  ],
+  "data": [
+    {
+      "id": "datahub",
+      "name": "DataHub",
+      "status": "Live",
+      "description": "Global data explorer connected to World Bank, FAO, and WHO data sources.",
+      "detail": "DataHub brings indicators, charts, comparisons, and downloads into a single dashboard-style research tool.",
+      "href": "datahub/",
+      "action": "Open explorer",
+      "icon": "database",
+      "external": true
+    }
+  ],
+  "labs": [
+    {
+      "id": "future-labs",
+      "name": "Future Experiments",
+      "status": "Research",
+      "description": "A place for experimental projects, prototypes, and research directions.",
+      "detail": "Labs will collect emerging experiments that do not yet belong to one of the main product categories.",
+      "href": "others.html",
+      "action": "View labs",
+      "icon": "sparkles",
+      "external": false
+    }
+  ]
+}

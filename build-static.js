@@ -18,6 +18,8 @@ const localReviewTargets = [
   "datahub",
   "styles.css",
   "app.js",
+  "product-expander.js",
+  "products-data.json",
   "assets",
   "DESKTOP_APP_INSTALL_README.md",
   "README.md",
