@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = ".next"
 
+[build.environment]
+  PUBLIC_HOLDING_PAGE = "1"
+
 [[headers]]
   for = "/*"
   [headers.values]

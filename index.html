@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f7f8fb">
-    <meta name="description" content="KabulHub transforms information into understanding through research, data science, software, and intelligent systems.">
-    <meta property="og:title" content="KabulHub | Research, Data, and Technology">
-    <meta property="og:description" content="Research-grade software, data products, and intelligent systems for better decisions.">
+    <meta name="description" content="KabulHub is a research and product company building educational platforms, data products, AI systems, and software tools that turn complex information into better decisions.">
+    <meta property="og:title" content="KabulHub | Research & Product Company">
+    <meta property="og:description" content="We build educational platforms, data products, AI systems, and research tools that help people and organizations make better decisions.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="assets/branding/04-logo-horizontal-light.svg">
     <meta name="twitter:card" content="summary_large_image">
-    <title>KabulHub | Research, Data, and Technology</title>
+    <title>KabulHub | Research & Product Company</title>
     <link rel="icon" href="assets/branding/11-favicon-32.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://unpkg.com">
-    <link rel="stylesheet" href="styles.css?v=products-education-copy-20260604">
+    <link rel="stylesheet" href="styles.css?v=premium-redesign-20260605">
     <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script type="importmap">
       {
@@ -312,24 +312,32 @@
       <nav class="header-nav" aria-label="KabulHub navigation">
         <a href="#home-title">Home</a>
         <a href="#products">Products</a>
+        <a href="#proof">Proof</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact Us</a>
+        <a class="nav-cta" href="#contact">Start a project</a>
       </nav>
     </header>
 
     <main class="home-main">
       <section class="home-hero" aria-labelledby="home-title">
         <div class="hero-copy" data-reveal="item">
-          <p class="section-kicker">Research, Data, and Technology</p>
+          <p class="section-kicker">Research &amp; Product Company</p>
           <h1 id="home-title">Transforming information into understanding.</h1>
-          <p>KabulHub builds software products, analytical frameworks, and intelligent systems that turn complexity into clarity.</p>
+          <p>KabulHub builds educational platforms, data products, AI systems, and research tools that help people and organizations make better decisions.</p>
           <div class="hero-actions">
             <a class="primary-link" href="#products">
               <span>Explore products</span>
               <i data-lucide="arrow-right"></i>
             </a>
-            <a class="secondary-link" href="#about">About KabulHub</a>
+            <a class="secondary-link" href="#contact">Start a project</a>
           </div>
+          <ul class="hero-trust" aria-label="What we work in">
+            <li>Research</li>
+            <li>Data Science</li>
+            <li>Machine Learning</li>
+            <li>Software Engineering</li>
+            <li>Education</li>
+          </ul>
         </div>
         <div class="hero-panel hero-icon-panel" aria-hidden="true" data-reveal="item">
           <svg class="hero-symbol hero-symbol-svg" width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -368,10 +376,11 @@
         </div>
       </section>
 
-      <section class="product-section" id="products" aria-labelledby="products-title" data-reveal="section">
+      <section class="product-section products-build-section" id="products" aria-labelledby="products-title" data-reveal="section">
         <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Products</p>
-          <h2 id="products-title">Choose a focus area.</h2>
+          <p class="section-kicker">What we're building</p>
+          <h2 id="products-title">Products and systems, in the open.</h2>
+          <p class="section-lead">A growing portfolio of platforms, data products, and intelligent systems — some live, some in active prototyping. Click any area to see what's inside.</p>
         </div>
         <div id="product-expander-root">
           <div class="product-grid" data-spotlight-grid>
@@ -459,37 +468,117 @@
         </div>
       </section>
 
+      <section class="content-section proof-section" id="proof" aria-labelledby="proof-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">Proof of work</p>
+          <h2 id="proof-title">Evidence, not just claims.</h2>
+          <p class="section-lead">An honest look at what we have built and shipped so far — prototypes, platforms, and experiments, with room to add metrics and case studies as they mature.</p>
+        </div>
+        <div class="proof-grid" data-spotlight-grid>
+          <article class="proof-card spotlight-tile" data-reveal="item">
+            <div class="proof-card-head">
+              <span class="build-icon"><i data-lucide="layout-dashboard"></i></span>
+              <h3>Product prototypes</h3>
+            </div>
+            <p>Shipped, working prototypes including a real-time computer-vision demo and offline-first desktop apps.</p>
+            <!-- TODO: replace with a real metric, e.g. "4 shipped prototypes" -->
+            <div class="ph-metric" role="img" aria-label="Metric placeholder">
+              <i data-lucide="trending-up"></i>
+              <div>
+                <strong>Metric placeholder</strong>
+                <span>Add number of users, courses, dashboards, models, or projects.</span>
+              </div>
+            </div>
+          </article>
+          <article class="proof-card spotlight-tile" data-reveal="item">
+            <div class="proof-card-head">
+              <span class="build-icon"><i data-lucide="database"></i></span>
+              <h3>Data &amp; analytics systems</h3>
+            </div>
+            <p>A live data explorer wired to World Bank, FAO, and WHO sources with charts, comparisons, and exports.</p>
+            <!-- TODO: replace with a real DataHub demo clip -->
+            <div class="ph-video" role="img" aria-label="Demo video placeholder">
+              <span class="ph-play"><i data-lucide="play"></i></span>
+              <div>
+                <strong>Demo video placeholder</strong>
+                <span>Add a 30–60 second product walkthrough.</span>
+              </div>
+            </div>
+          </article>
+          <article class="proof-card spotlight-tile" data-reveal="item">
+            <div class="proof-card-head">
+              <span class="build-icon"><i data-lucide="graduation-cap"></i></span>
+              <h3>Education platform</h3>
+            </div>
+            <p>KabulLearn delivers trilingual courses, guided quizzes, and verified certificates — built and live.</p>
+            <!-- TODO: replace with a real KabulLearn screenshot -->
+            <div class="ph-shot" role="img" aria-label="Screenshot placeholder">
+              <span class="ph-label"><i data-lucide="image"></i> Screenshot placeholder</span>
+              <span class="ph-sub">Add product screenshot here</span>
+            </div>
+          </article>
+          <article class="proof-card spotlight-tile" data-reveal="item">
+            <div class="proof-card-head">
+              <span class="build-icon"><i data-lucide="brain-circuit"></i></span>
+              <h3>Machine learning experiments</h3>
+            </div>
+            <p>Browser-based ML experiments using TensorFlow.js and MediaPipe, exploring applied vision and inference.</p>
+            <!-- TODO: replace with a real before/after result or accuracy metric -->
+            <div class="ph-case" role="img" aria-label="Case study placeholder">
+              <i data-lucide="file-text"></i>
+              <div>
+                <strong>Case study placeholder</strong>
+                <span>Add the problem, solution, and result.</span>
+              </div>
+            </div>
+          </article>
+          <article class="proof-card spotlight-tile" data-reveal="item">
+            <div class="proof-card-head">
+              <span class="build-icon"><i data-lucide="sparkles"></i></span>
+              <h3>Research notes &amp; frameworks</h3>
+            </div>
+            <p>Working notes, analytical frameworks, and early concepts that feed the next round of products.</p>
+            <!-- TODO: replace with a real metric or link to published notes -->
+            <div class="ph-metric" role="img" aria-label="Metric placeholder">
+              <i data-lucide="trending-up"></i>
+              <div>
+                <strong>Metric placeholder</strong>
+                <span>Add count of notes, frameworks, or experiments.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="content-section about-section" id="about" aria-labelledby="about-title" data-reveal="section">
         <div class="section-copy" data-reveal="item">
           <p class="section-kicker">About</p>
           <h2 id="about-title">Engineering clarity from raw data.</h2>
         </div>
         <div class="about-copy" data-reveal="item">
-          <p>KabulHub is a research, data, and technology company focused on transforming information into understanding.</p>
-          <p>We build software products, analytical frameworks, and intelligent systems that help individuals, organizations, and communities make better decisions. Our work spans data science, economics, machine learning, software engineering, and applied research, but our purpose extends beyond any particular technology.</p>
-          <p>Technology changes. Tools evolve. The need for deeper understanding remains.</p>
-          <p>KabulHub exists to bridge the gap between data and meaningful action by creating systems that turn complexity into clarity.</p>
+          <p>KabulHub is a research, data, and technology company focused on transforming complex information into useful understanding.</p>
+          <p>We build software products, analytical frameworks, learning platforms, and intelligent systems for people and organizations that need clearer decisions.</p>
+          <p>Our work spans data science, economics, machine learning, software engineering, education, and applied research. The common thread is simple: turn complexity into clarity, and clarity into action.</p>
         </div>
       </section>
 
       <section class="content-section statements-section" aria-labelledby="statements-title" data-reveal="section">
         <div class="section-copy" data-reveal="item">
           <p class="section-kicker">Vision & Mission</p>
-          <h2 id="statements-title">Why KabulHub exists.</h2>
+          <h2 id="statements-title">What drives the work.</h2>
         </div>
         <div class="statement-grid" aria-label="Vision and mission" data-spotlight-grid>
           <article class="statement-panel spotlight-tile" id="vision" data-reveal="item">
             <i data-lucide="telescope"></i>
             <p class="section-kicker">Vision</p>
             <h2>Advance human understanding.</h2>
-            <p>To advance human understanding by transforming data into knowledge, knowledge into wisdom, and wisdom into meaningful action.</p>
+            <p>To help people move from data to knowledge, from knowledge to wisdom, and from wisdom to meaningful action.</p>
           </article>
           <article class="statement-panel spotlight-tile" id="mission" data-reveal="item">
             <i data-lucide="compass"></i>
             <p class="section-kicker">Mission</p>
             <h2>Build tools for better decisions.</h2>
-            <p>To build products, systems, and research-driven solutions that help people better understand complex problems and make more informed decisions.</p>
-            <p>Through data science, technology, and evidence-based inquiry, we create tools that convert information into insight and insight into impact.</p>
+            <p>To create educational platforms, data systems, AI tools, and research-driven products that help people understand complex problems and act with confidence.</p>
           </article>
         </div>
       </section>
@@ -502,51 +591,97 @@
         <div class="spotlight-grid values-grid" data-spotlight-grid>
           <article class="spotlight-card spotlight-tile" data-reveal="item">
             <span>01</span>
-            <h3>Truth Over Assumption</h3>
+            <h3>Truth over assumption</h3>
             <p>We seek evidence before conclusions.</p>
           </article>
           <article class="spotlight-card spotlight-tile" data-reveal="item">
             <span>02</span>
-            <h3>Understanding Over Information</h3>
-            <p>Information alone is not enough. Our goal is meaningful understanding.</p>
+            <h3>Understanding over information</h3>
+            <p>Information is not enough. The goal is meaning.</p>
           </article>
           <article class="spotlight-card spotlight-tile" data-reveal="item">
             <span>03</span>
-            <h3>Simplicity Through Clarity</h3>
-            <p>Complex problems deserve clear explanations and elegant solutions.</p>
+            <h3>Clarity through simplicity</h3>
+            <p>Complex problems deserve clear explanations and elegant systems.</p>
           </article>
           <article class="spotlight-card spotlight-tile" data-reveal="item">
             <span>04</span>
-            <h3>Curiosity Without Boundaries</h3>
-            <p>Learning is a lifelong pursuit, and innovation begins with asking better questions.</p>
+            <h3>Curiosity without boundaries</h3>
+            <p>Good ideas often begin with better questions.</p>
           </article>
           <article class="spotlight-card spotlight-tile" data-reveal="item">
             <span>05</span>
-            <h3>Impact Over Activity</h3>
-            <p>The value of knowledge is measured by its ability to improve decisions and outcomes.</p>
+            <h3>Impact over activity</h3>
+            <p>The value of work is measured by better decisions and outcomes.</p>
           </article>
         </div>
       </section>
 
-      <section class="content-section focus-section" id="focus" aria-labelledby="focus-title" data-reveal="section">
+      <section class="content-section audience-section" id="who-we-help" aria-labelledby="audience-title" data-reveal="section">
         <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Focus</p>
-          <h2 id="focus-title">Research, systems, and applied intelligence.</h2>
+          <p class="section-kicker">Who we help</p>
+          <h2 id="audience-title">Built for people who need clearer decisions.</h2>
         </div>
-        <div class="focus-list" data-reveal="item">
-          <span>Data Science</span>
-          <span>Education</span>
-          <span>Machine Learning</span>
-          <span>Software Engineering</span>
-          <span>Labs</span>
+        <div class="audience-grid spotlight-grid" data-spotlight-grid>
+          <article class="audience-card spotlight-tile" data-reveal="item">
+            <span class="build-icon"><i data-lucide="user-round"></i></span>
+            <h3>Learners</h3>
+            <p>People building practical skills in technology, data, and applied problem solving.</p>
+          </article>
+          <article class="audience-card spotlight-tile" data-reveal="item">
+            <span class="build-icon"><i data-lucide="users-round"></i></span>
+            <h3>Educators</h3>
+            <p>Instructors and institutions that need modern tools for teaching and assessment.</p>
+          </article>
+          <article class="audience-card spotlight-tile" data-reveal="item">
+            <span class="build-icon"><i data-lucide="building-2"></i></span>
+            <h3>Organizations</h3>
+            <p>Teams that need dashboards, automation, analytics, and decision-support systems.</p>
+          </article>
+          <article class="audience-card spotlight-tile" data-reveal="item">
+            <span class="build-icon"><i data-lucide="flask-conical"></i></span>
+            <h3>Researchers &amp; builders</h3>
+            <p>People exploring ideas, prototypes, models, and experiments.</p>
+          </article>
         </div>
+      </section>
+
+      <section class="content-section process-section" id="how-we-work" aria-labelledby="process-title" data-reveal="section">
+        <div class="section-copy" data-reveal="item">
+          <p class="section-kicker">How we work</p>
+          <h2 id="process-title">From a question to a working system.</h2>
+        </div>
+        <ol class="process-grid" data-reveal="item">
+          <li class="process-step">
+            <span class="process-num">1</span>
+            <h3>Understand</h3>
+            <p>Define the problem, audience, data, and decision need.</p>
+          </li>
+          <li class="process-step">
+            <span class="process-num">2</span>
+            <h3>Design</h3>
+            <p>Shape the product, workflow, model, or analytical framework.</p>
+          </li>
+          <li class="process-step">
+            <span class="process-num">3</span>
+            <h3>Build</h3>
+            <p>Develop the platform, dashboard, prototype, or intelligent system.</p>
+          </li>
+          <li class="process-step">
+            <span class="process-num">4</span>
+            <h3>Improve</h3>
+            <p>Test, measure, refine, and turn feedback into better outcomes.</p>
+          </li>
+        </ol>
       </section>
 
       <section class="content-section contact-section" id="contact" aria-labelledby="contact-title" data-reveal="section">
         <div class="section-copy" data-reveal="item">
           <p class="section-kicker">Contact Us</p>
           <h2 id="contact-title">Start a conversation.</h2>
+          <p class="section-lead">Tell us what you are trying to understand, build, automate, teach, or improve.</p>
         </div>
+        <!-- TODO: form posts to a Google Apps Script endpoint. Swap the action URL if you move to a different backend (e.g. a serverless email function). The submit handler in index.html degrades gracefully and shows a fallback email on error. -->
         <form class="contact-form" name="contact" method="POST" action="https://script.google.com/macros/s/AKfycbzhBqFOR2j9-h8kcJ51woQR6nMKvFjzP1FqIeROtuXYdQJXZlKuQ1iNk4j3IRspyo6cIA/exec" data-contact-form data-reveal="item">
           <input type="hidden" name="loaded_at" value="">
           <label class="form-honeypot" aria-hidden="true">
@@ -569,11 +704,12 @@
             <span>Area of interest</span>
             <select name="interest" required>
               <option value="">Select one</option>
-              <option>Data Science</option>
-              <option>Education</option>
-              <option>Machine Learning</option>
-              <option>Software Engineering</option>
-              <option>Labs</option>
+              <option>Education platform</option>
+              <option>Data product / dashboard</option>
+              <option>AI or machine learning system</option>
+              <option>Software prototype</option>
+              <option>Research collaboration</option>
+              <option>Other</option>
             </select>
           </label>
           <label>
@@ -581,32 +717,49 @@
             <select name="timeline">
               <option value="">Select one</option>
               <option>Immediately</option>
-              <option>1-3 months</option>
-              <option>3-6 months</option>
-              <option>Exploring</option>
+              <option>1–3 months</option>
+              <option>3–6 months</option>
+              <option>Just exploring</option>
             </select>
           </label>
           <label class="form-wide">
             <span>Message</span>
-            <textarea name="message" rows="6" placeholder="Tell us what you are trying to understand, build, or improve." required></textarea>
+            <textarea name="message" rows="6" placeholder="Tell us what you are trying to understand, build, automate, teach, or improve." required></textarea>
           </label>
           <button class="primary-link form-submit" type="submit">
             <span>Send message</span>
             <i data-lucide="send"></i>
           </button>
+          <p class="form-note">We usually respond within 1–2 business days.</p>
           <p class="form-status" data-form-status aria-live="polite"></p>
         </form>
       </section>
     </main>
     <footer class="site-footer">
-      <div>
-        <img src="assets/branding/06-logo-horizontal-transparent.svg" alt="KabulHub">
-        <p>Research, data, and technology for meaningful understanding.</p>
-      </div>
-      <div class="footer-right">
-        <address class="footer-contact">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/branding/06-logo-horizontal-transparent.svg" alt="KabulHub">
+          <p>Research, data, and technology for meaningful understanding.</p>
+        </div>
+        <nav class="footer-col" aria-label="Quick links">
+          <h4>Company</h4>
+          <a href="#home-title">Home</a>
+          <a href="#products">Products</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <nav class="footer-col" aria-label="Products">
+          <h4>Products</h4>
+          <a href="https://www.kabullearn.com" target="_blank" rel="noopener">KabulLearn</a>
+          <a href="machine-learning.html">Qustate</a>
+          <a href="data.html">Data Products</a>
+          <a href="machine-learning.html">AI Systems</a>
+          <a href="others.html">Labs</a>
+        </nav>
+        <div class="footer-col footer-contact-col">
+          <h4>Contact</h4>
           <a href="mailto:info@kabulhub.com">info@kabulhub.com</a>
-          <span>Chicago, IL</span>
+          <span class="footer-location">Chicago, Illinois, USA</span>
           <span class="social-links" aria-label="Social media">
             <a href="https://twitter.com/KabulhubLLC" aria-label="Twitter" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -639,8 +792,11 @@
               </svg>
             </a>
           </span>
-        </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
         <p>© 2026 KabulHub LLC. All rights reserved.</p>
+        <p class="footer-built">Research &amp; product company · Chicago, IL</p>
       </div>
     </footer>
   </body>

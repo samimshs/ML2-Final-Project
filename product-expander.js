@@ -94,6 +94,7 @@ const localFallbackProducts = {
       href: "ocustate.html",
       action: "Open demo",
       icon: "eye",
+      image: "assets/product-thumbnails/Ocustate.png",
       external: true
     }
   ],
@@ -107,6 +108,7 @@ const localFallbackProducts = {
       href: "https://www.kabullearn.com",
       action: "Open website",
       icon: "book-open-check",
+      image: "assets/product-thumbnails/Kabullearn.png",
       external: true
     }
   ],
@@ -120,6 +122,7 @@ const localFallbackProducts = {
       href: "softwares.html",
       action: "View details",
       icon: "package-check",
+      image: "assets/product-thumbnails/daftarcha-dashboard.png",
       external: false
     },
     {
@@ -131,6 +134,7 @@ const localFallbackProducts = {
       href: "softwares.html",
       action: "View details",
       icon: "wallet-cards",
+      image: "assets/product-thumbnails/moneymate-dashboard.png",
       external: false
     }
   ],
@@ -144,6 +148,7 @@ const localFallbackProducts = {
       href: "datahub/",
       action: "Open explorer",
       icon: "database",
+      image: "assets/product-thumbnails/DataHub.png",
       external: true
     }
   ],
@@ -157,6 +162,7 @@ const localFallbackProducts = {
       href: "others.html",
       action: "View labs",
       icon: "sparkles",
+      image: "assets/product-thumbnails/labs.png",
       external: false
     }
   ]
@@ -305,11 +311,21 @@ function ExpandedProductView({
                     animate: { opacity: 1, y: 0 },
                     transition: { duration: 0.18 }
                   },
-                  h(
-                    "div",
-                    { className: "product-detail-icon", "aria-hidden": "true" },
-                    Icon({ name: product.icon || category.icon })
-                  ),
+                  product.image
+                    ? h(
+                        "div",
+                        { className: "product-detail-shot", "aria-hidden": "true" },
+                        h("img", {
+                          src: product.image,
+                          alt: `${product.name} screenshot`,
+                          loading: "lazy"
+                        })
+                      )
+                    : h(
+                        "div",
+                        { className: "product-detail-icon", "aria-hidden": "true" },
+                        Icon({ name: product.icon || category.icon })
+                      ),
                   h(
                     "div",
                     { className: "product-expanded-item-copy" },
