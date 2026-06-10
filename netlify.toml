@@ -3,7 +3,7 @@
   publish = ".next"
 
 [build.environment]
-  PUBLIC_HOLDING_PAGE = "1"
+  PUBLIC_HOLDING_PAGE = "0"
 
 [[headers]]
   for = "/*"
