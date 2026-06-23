@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f8fb">
+    <meta name="theme-color" content="#0a0a0a">
     <meta name="description" content="KabulHub is a research and product company building educational platforms, data products, AI systems, and software tools that turn complex information into better decisions.">
     <meta property="og:title" content="KabulHub | Research & Product Company">
     <meta property="og:description" content="We build educational platforms, data products, AI systems, and research tools that help people and organizations make better decisions.">
@@ -12,326 +12,201 @@
     <meta name="twitter:card" content="summary_large_image">
     <title>KabulHub | Research & Product Company</title>
     <link rel="icon" href="assets/branding/11-favicon-32.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://unpkg.com">
-    <link rel="stylesheet" href="styles.css?v=premium-redesign-20260605">
+    <link rel="stylesheet" href="styles.css">
     <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://esm.sh/react@18.3.1",
-          "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
-          "react-dom": "https://esm.sh/react-dom@18.3.1",
-          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client"
-        }
-      }
-    </script>
-    <script type="module" src="product-expander.js"></script>
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
+      window.addEventListener('DOMContentLoaded', () => {
         if (window.lucide) window.lucide.createIcons();
 
-        document.querySelectorAll("[data-spotlight-grid]").forEach((grid) => {
-          const cards = Array.from(grid.querySelectorAll(".spotlight-tile"));
-
-          const updateSpotlight = (event) => {
-            const gridRect = grid.getBoundingClientRect();
-            grid.style.setProperty("--mouse-x", `${event.clientX - gridRect.left}px`);
-            grid.style.setProperty("--mouse-y", `${event.clientY - gridRect.top}px`);
-
-            cards.forEach((card) => {
-              const cardRect = card.getBoundingClientRect();
-              card.style.setProperty("--card-mouse-x", `${event.clientX - cardRect.left}px`);
-              card.style.setProperty("--card-mouse-y", `${event.clientY - cardRect.top}px`);
-            });
-          };
-
-          grid.addEventListener("mousemove", updateSpotlight);
-          grid.addEventListener("mouseleave", () => {
-            grid.style.removeProperty("--mouse-x");
-            grid.style.removeProperty("--mouse-y");
-          });
-        });
-
-        document.querySelectorAll("[data-tilt]").forEach((panel) => {
-          panel.addEventListener("mousemove", (event) => {
-            const rect = panel.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / rect.width - 0.5;
-            const y = (event.clientY - rect.top) / rect.height - 0.5;
-            panel.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
-            panel.style.setProperty("--tilt-y", `${(x * 4).toFixed(2)}deg`);
-          });
-
-          panel.addEventListener("mouseleave", () => {
-            panel.style.removeProperty("--tilt-x");
-            panel.style.removeProperty("--tilt-y");
-          });
-        });
-
-        const revealItems = document.querySelectorAll("[data-reveal]");
-
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                revealObserver.unobserve(entry.target);
-              }
-            });
-          }, { rootMargin: "0px 0px -18% 0px", threshold: 0.08 });
-
-          revealItems.forEach((item) => revealObserver.observe(item));
+        /* Reveal on scroll */
+        const revealItems = document.querySelectorAll('[data-reveal]');
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObs.unobserve(e.target); } });
+          }, { rootMargin: '0px 0px -14% 0px', threshold: 0.06 });
+          revealItems.forEach(el => revealObs.observe(el));
         } else {
-          revealItems.forEach((item) => item.classList.add("is-visible"));
+          revealItems.forEach(el => el.classList.add('is-visible'));
         }
 
-        const slowFinish = (t) => 1 - Math.pow(1 - t, 3);
-
-        document.querySelectorAll('a[href^="#"]').forEach((link) => {
-          link.addEventListener("click", (event) => {
-            const target = document.querySelector(link.getAttribute("href"));
+        /* Smooth scroll */
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+          link.addEventListener('click', e => {
+            const target = document.querySelector(link.getAttribute('href'));
             if (!target) return;
-
-            event.preventDefault();
-
-            const startY = window.scrollY;
-            const headerOffset = document.querySelector(".home-header")?.offsetHeight || 0;
-            const targetY = target.getBoundingClientRect().top + window.scrollY - headerOffset - 18;
-            const distance = targetY - startY;
-            const duration = 700;
-            let startTime = null;
-            const previousScrollBehavior = document.documentElement.style.scrollBehavior;
-            document.documentElement.style.scrollBehavior = "auto";
-
-            const step = (timestamp) => {
-              if (!startTime) startTime = timestamp;
-              const progress = Math.min((timestamp - startTime) / duration, 1);
-              window.scrollTo(0, startY + distance * slowFinish(progress));
-
-              if (progress < 1) {
-                requestAnimationFrame(step);
-              } else {
-                document.documentElement.style.scrollBehavior = previousScrollBehavior;
-                history.pushState(null, "", link.getAttribute("href"));
-              }
+            e.preventDefault();
+            const start = window.scrollY;
+            const navH = document.getElementById('kh-nav')?.offsetHeight || 0;
+            const end = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+            const dist = end - start, dur = 700;
+            let t0 = null;
+            document.documentElement.style.scrollBehavior = 'auto';
+            const step = ts => {
+              if (!t0) t0 = ts;
+              const p = Math.min((ts - t0) / dur, 1);
+              window.scrollTo(0, start + dist * easeOut(p));
+              if (p < 1) requestAnimationFrame(step);
+              else { document.documentElement.style.scrollBehavior = ''; history.pushState(null, '', link.getAttribute('href')); }
             };
-
             requestAnimationFrame(step);
           });
         });
 
-        const mobileToggle = document.querySelector(".nav-toggle");
-        const headerNav = document.querySelector(".header-nav");
-
-        mobileToggle?.addEventListener("click", () => {
-          const isOpen = headerNav.classList.toggle("is-open");
-          mobileToggle.setAttribute("aria-expanded", String(isOpen));
+        /* Mobile nav */
+        const navToggle = document.querySelector('.kh-nav__toggle');
+        const navLinks  = document.querySelector('.kh-nav__links');
+        navToggle?.addEventListener('click', () => {
+          const open = navLinks.classList.toggle('is-open');
+          navToggle.setAttribute('aria-expanded', String(open));
         });
+        navLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+          navLinks.classList.remove('is-open');
+          navToggle?.setAttribute('aria-expanded', 'false');
+        }));
 
-        headerNav?.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            headerNav.classList.remove("is-open");
-            mobileToggle?.setAttribute("aria-expanded", "false");
-          });
-        });
+        /* Nav active-link highlight */
+        const navAnchors = Array.from(document.querySelectorAll('.kh-nav__links a[href^="#"]'));
+        const navTargets = navAnchors.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+        const activeObs = new IntersectionObserver((entries) => {
+          const vis = entries.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!vis) return;
+          navAnchors.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === `#${vis.target.id}`));
+        }, { rootMargin: '-24% 0px -58% 0px', threshold: [0.1, 0.35, 0.6] });
+        navTargets.forEach(t => activeObs.observe(t));
 
-        const navLinks = Array.from(document.querySelectorAll(".header-nav a[href^='#']"));
-        const navTargets = navLinks
-          .map((link) => document.querySelector(link.getAttribute("href")))
-          .filter(Boolean);
-
-        const activeObserver = new IntersectionObserver((entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-          if (!visible) return;
-
-          navLinks.forEach((link) => {
-            link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
-          });
-        }, { rootMargin: "-24% 0px -58% 0px", threshold: [0.1, 0.35, 0.6] });
-
-        navTargets.forEach((target) => activeObserver.observe(target));
-
-        const heroSymbol = document.querySelector(".hero-symbol-svg");
-
-        if (heroSymbol && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          const nodes = Array.from(heroSymbol.querySelectorAll(".hero-node"));
-          let frame = null;
-          let scrollFrame = null;
-          const symbolMotion = {
-            x: 0,
-            y: 0,
-            scale: 1,
-            opacity: 0.86,
-            targetX: 0,
-            targetY: 0,
-            targetScale: 1,
-            targetOpacity: 0.86,
-          };
-
-          const updateSymbolTargets = () => {
-            const progress = Math.min(window.scrollY / 950, 1);
-            symbolMotion.targetX = progress * -280;
-            symbolMotion.targetY = progress * 360;
-            symbolMotion.targetScale = 1 + progress * 0.62;
-            symbolMotion.targetOpacity = 0.86 - progress * 0.28;
-          };
-
-          const renderSymbolScroll = () => {
-            symbolMotion.x += (symbolMotion.targetX - symbolMotion.x) * 0.14;
-            symbolMotion.y += (symbolMotion.targetY - symbolMotion.y) * 0.14;
-            symbolMotion.scale += (symbolMotion.targetScale - symbolMotion.scale) * 0.14;
-            symbolMotion.opacity += (symbolMotion.targetOpacity - symbolMotion.opacity) * 0.14;
-
-            heroSymbol.style.setProperty("--hero-symbol-scroll-x", `${symbolMotion.x.toFixed(2)}px`);
-            heroSymbol.style.setProperty("--hero-symbol-scroll-y", `${symbolMotion.y.toFixed(2)}px`);
-            heroSymbol.style.setProperty("--hero-symbol-scale", symbolMotion.scale.toFixed(3));
-            heroSymbol.style.setProperty("--hero-symbol-opacity", symbolMotion.opacity.toFixed(3));
-
-            const isSettled =
-              Math.abs(symbolMotion.targetX - symbolMotion.x) < 0.3 &&
-              Math.abs(symbolMotion.targetY - symbolMotion.y) < 0.3 &&
-              Math.abs(symbolMotion.targetScale - symbolMotion.scale) < 0.002 &&
-              Math.abs(symbolMotion.targetOpacity - symbolMotion.opacity) < 0.002;
-
-            if (isSettled) {
-              symbolMotion.x = symbolMotion.targetX;
-              symbolMotion.y = symbolMotion.targetY;
-              symbolMotion.scale = symbolMotion.targetScale;
-              symbolMotion.opacity = symbolMotion.targetOpacity;
-              heroSymbol.style.setProperty("--hero-symbol-scroll-x", `${symbolMotion.x.toFixed(2)}px`);
-              heroSymbol.style.setProperty("--hero-symbol-scroll-y", `${symbolMotion.y.toFixed(2)}px`);
-              heroSymbol.style.setProperty("--hero-symbol-scale", symbolMotion.scale.toFixed(3));
-              heroSymbol.style.setProperty("--hero-symbol-opacity", symbolMotion.opacity.toFixed(3));
-              scrollFrame = null;
-              return;
-            }
-
-            scrollFrame = requestAnimationFrame(renderSymbolScroll);
-          };
-
-          const requestSymbolScroll = () => {
-            updateSymbolTargets();
-            if (scrollFrame) return;
-            scrollFrame = requestAnimationFrame(renderSymbolScroll);
-          };
-
-          const resetNodes = () => {
-            heroSymbol.classList.remove("is-active");
-            nodes.forEach((node) => node.removeAttribute("transform"));
-          };
-
-          const attractNodes = (event) => {
-            if (frame) cancelAnimationFrame(frame);
-
-            frame = requestAnimationFrame(() => {
-              const rect = heroSymbol.getBoundingClientRect();
-              const pointerX = ((event.clientX - rect.left) / rect.width) * 400;
-              const pointerY = ((event.clientY - rect.top) / rect.height) * 400;
-              const insideRange =
-                event.clientX > rect.left - 140 &&
-                event.clientX < rect.right + 140 &&
-                event.clientY > rect.top - 140 &&
-                event.clientY < rect.bottom + 140;
-
-              if (!insideRange) {
-                resetNodes();
-                return;
-              }
-
-              heroSymbol.classList.add("is-active");
-
-              nodes.forEach((node) => {
-                const x = Number(node.dataset.x);
-                const y = Number(node.dataset.y);
-                const dx = pointerX - x;
-                const dy = pointerY - y;
-                const distance = Math.hypot(dx, dy);
-                const pull = Math.max(0, 1 - distance / 190) * 0.14;
-                node.setAttribute("transform", `translate(${(dx * pull).toFixed(2)} ${(dy * pull).toFixed(2)})`);
-              });
-            });
-          };
-
-          window.addEventListener("pointermove", attractNodes, { passive: true });
-          window.addEventListener("pointerleave", resetNodes);
-          window.addEventListener("scroll", requestSymbolScroll, { passive: true });
-          requestSymbolScroll();
-        }
-
-        const contactForm = document.querySelector("[data-contact-form]");
-
-        if (contactForm) {
-          contactForm.elements.loaded_at.value = String(Date.now());
-        }
-
-        contactForm?.addEventListener("submit", async (event) => {
-          event.preventDefault();
-
-          const submitButton = contactForm.querySelector("button[type='submit']");
-          const status = contactForm.querySelector("[data-form-status]");
-          const payload = new URLSearchParams(new FormData(contactForm));
-          const elapsedSeconds = Math.round((Date.now() - Number(payload.get("loaded_at") || Date.now())) / 1000);
-          payload.set("form_elapsed_seconds", String(elapsedSeconds));
-          payload.set("submitted_at", new Date().toISOString());
-          payload.set("source_page", window.location.href);
-
-          submitButton.disabled = true;
-          contactForm.dataset.state = "submitting";
-          if (status) status.textContent = "Sending your message...";
-
-          try {
-            await fetch(contactForm.action, {
-              method: "POST",
-              body: payload,
-              mode: "no-cors"
-            });
-
-            contactForm.reset();
-            contactForm.dataset.state = "sent";
-            if (status) status.textContent = "Message sent. Thank you for reaching out.";
-          } catch (error) {
-            contactForm.dataset.state = "error";
-            if (status) status.textContent = "Something went wrong. Please email info@kabulhub.com.";
-          } finally {
-            submitButton.disabled = false;
+        /* Nav scrolled border */
+        const nav = document.getElementById('kh-nav');
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => { nav?.classList.toggle('kh-nav--scrolled', window.scrollY > 20); ticking = false; });
+            ticking = true;
           }
+        }, { passive: true });
+
+        /* Contact form */
+        const form = document.querySelector('[data-contact-form]');
+        if (form) form.elements.loaded_at.value = String(Date.now());
+        form?.addEventListener('submit', async e => {
+          e.preventDefault();
+          const btn = form.querySelector('button[type="submit"]');
+          const status = form.querySelector('[data-form-status]');
+          const payload = new URLSearchParams(new FormData(form));
+          payload.set('form_elapsed_seconds', String(Math.round((Date.now() - Number(payload.get('loaded_at') || Date.now())) / 1000)));
+          payload.set('submitted_at', new Date().toISOString());
+          payload.set('source_page', window.location.href);
+          btn.disabled = true;
+          form.dataset.state = 'submitting';
+          if (status) status.textContent = 'Sending your message…';
+          try {
+            await fetch(form.action, { method: 'POST', body: payload, mode: 'no-cors' });
+            form.reset();
+            form.dataset.state = 'sent';
+            if (status) status.textContent = 'Message sent. Thank you for reaching out.';
+          } catch {
+            form.dataset.state = 'error';
+            if (status) status.textContent = 'Something went wrong. Please email info@kabulhub.com.';
+          } finally { btn.disabled = false; }
         });
+
+        /* Hero dot-grid canvas */
+        (function () {
+          const canvas = document.getElementById('hero-canvas');
+          if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          const ctx = canvas.getContext('2d');
+          let w, h, dots, mx = -1e9, my = -1e9;
+          const SP = 36, BASE_R = 1.4;
+          function init() {
+            w = canvas.width = canvas.offsetWidth;
+            h = canvas.height = canvas.offsetHeight;
+            dots = [];
+            for (let x = SP / 2; x < w + SP; x += SP)
+              for (let y = SP / 2; y < h + SP; y += SP)
+                dots.push({ x, y, ph: Math.random() * Math.PI * 2 });
+          }
+          const section = canvas.parentElement;
+          section.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+          section.addEventListener('mouseleave', () => { mx = my = -1e9; });
+          let t = 0;
+          function tick() {
+            ctx.clearRect(0, 0, w, h);
+            t += 0.004;
+            for (const d of dots) {
+              const dist = Math.hypot(mx - d.x, my - d.y);
+              const prox = Math.max(0, 1 - dist / 220);
+              const alpha = 0.11 + Math.sin(t + d.ph) * 0.05 + prox * 0.52;
+              const rad = BASE_R + prox * 2.2;
+              ctx.fillStyle = prox > 0.08 ? `rgba(99,102,241,${alpha})` : `rgba(255,255,255,${alpha * 0.32})`;
+              ctx.beginPath();
+              ctx.arc(d.x, d.y, rad, 0, 6.28);
+              ctx.fill();
+            }
+            requestAnimationFrame(tick);
+          }
+          window.addEventListener('resize', init);
+          init();
+          tick();
+        })();
       });
     </script>
   </head>
   <body class="home-page">
-    <header class="home-header">
-      <a class="header-logo" href="index.html" aria-label="KabulHub home">
-        <img src="assets/branding/06-logo-horizontal-transparent.svg" alt="KabulHub">
-      </a>
-      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
-        <i data-lucide="menu"></i>
-      </button>
-      <nav class="header-nav" aria-label="KabulHub navigation">
-        <a href="#home-title">Home</a>
-        <a href="#products">Products</a>
-        <a href="#proof">Proof</a>
-        <a href="#about">About</a>
-        <a class="nav-cta" href="#contact">Start a project</a>
-      </nav>
+
+    <!-- ═══════════════════════════════════════
+         NAVIGATION
+    ═══════════════════════════════════════ -->
+    <header class="kh-nav" id="kh-nav" role="banner">
+      <div class="kh-nav__inner">
+        <a class="kh-nav__logo" href="index.html" aria-label="KabulHub — home">
+          <img src="assets/branding/05b-logo-horizontal-white-icon.svg" alt="KabulHub" width="148" height="auto">
+        </a>
+        <button class="kh-nav__toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i data-lucide="menu"></i>
+        </button>
+        <nav class="kh-nav__links" aria-label="KabulHub navigation">
+          <a href="#home-title">Home</a>
+          <a href="#products">Products</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a class="kh-nav__cta" href="#contact">Start a project</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="home-main">
-      <section class="home-hero" aria-labelledby="home-title">
-        <div class="hero-copy" data-reveal="item">
-          <p class="section-kicker">Research &amp; Product Company</p>
-          <h1 id="home-title">Transforming information into understanding.</h1>
-          <p>KabulHub builds educational platforms, data products, AI systems, and research tools that help people and organizations make better decisions.</p>
-          <div class="hero-actions">
-            <a class="primary-link" href="#products">
-              <span>Explore products</span>
-              <i data-lucide="arrow-right"></i>
-            </a>
-            <a class="secondary-link" href="#contact">Start a project</a>
+    <main>
+
+      <!-- ═══════════════════════════════════════
+           HERO
+      ═══════════════════════════════════════ -->
+      <section class="kh-hero" aria-labelledby="home-title">
+        <canvas class="kh-hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="kh-hero__glow" aria-hidden="true"></div>
+        <div class="kh-hero__inner">
+          <div class="kh-hero__label" data-reveal="item">
+            <span class="kh-pulse" aria-hidden="true"></span>
+            RESEARCH &amp; PRODUCT COMPANY
           </div>
-          <ul class="hero-trust" aria-label="What we work in">
+          <h1 class="kh-hero__h1" id="home-title" data-reveal="item">
+            <em class="kh-h1-serif">Transforming</em>
+            <span class="kh-h1-sans"> information into</span>
+            <span class="kh-h1-accent"> understanding.</span>
+          </h1>
+          <p class="kh-hero__sub" data-reveal="item">
+            KabulHub builds educational platforms, data products, AI systems, and research tools that help people and organizations make better decisions.
+          </p>
+          <div class="kh-hero__cta" data-reveal="item">
+            <a class="kh-btn kh-btn--primary" href="#products">
+              Explore products
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a class="kh-btn kh-btn--ghost" href="#contact">Start a project</a>
+          </div>
+          <ul class="kh-hero__chips" aria-label="Areas of work" data-reveal="item">
             <li>Research</li>
             <li>Data Science</li>
             <li>Machine Learning</li>
@@ -339,465 +214,354 @@
             <li>Education</li>
           </ul>
         </div>
-        <div class="hero-panel hero-icon-panel" aria-hidden="true" data-reveal="item">
-          <svg class="hero-symbol hero-symbol-svg" width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <line x1="200" y1="200" x2="200" y2="62" stroke="#2563EB" stroke-width="2" opacity="0.7"/>
-            <line x1="200" y1="200" x2="331" y2="106" stroke="#2563EB" stroke-width="2" opacity="0.7"/>
-            <line x1="200" y1="200" x2="348" y2="248" stroke="#2563EB" stroke-width="2" opacity="0.7"/>
-            <line x1="200" y1="200" x2="272" y2="348" stroke="#2563EB" stroke-width="2" opacity="0.7"/>
-            <line x1="200" y1="200" x2="128" y2="348" stroke="#2563EB" stroke-width="2" opacity="0.6"/>
-            <line x1="200" y1="200" x2="52" y2="248" stroke="#2563EB" stroke-width="2" opacity="0.6"/>
-            <line x1="200" y1="200" x2="69" y2="106" stroke="#2563EB" stroke-width="2" opacity="0.6"/>
-            <line x1="200" y1="62" x2="331" y2="106" stroke="#1D4ED8" stroke-width="1" opacity="0.3"/>
-            <line x1="331" y1="106" x2="348" y2="248" stroke="#1D4ED8" stroke-width="1" opacity="0.3"/>
-            <line x1="348" y1="248" x2="272" y2="348" stroke="#1D4ED8" stroke-width="1" opacity="0.3"/>
-            <line x1="272" y1="348" x2="128" y2="348" stroke="#1D4ED8" stroke-width="1" opacity="0.25"/>
-            <line x1="128" y1="348" x2="52" y2="248" stroke="#1D4ED8" stroke-width="1" opacity="0.25"/>
-            <line x1="52" y1="248" x2="69" y2="106" stroke="#1D4ED8" stroke-width="1" opacity="0.25"/>
-            <line x1="69" y1="106" x2="200" y2="62" stroke="#1D4ED8" stroke-width="1" opacity="0.3"/>
-            <circle class="hero-node" data-x="200" data-y="62" cx="200" cy="62" r="14" fill="#1D4ED8" stroke="#3B82F6" stroke-width="2"/>
-            <circle class="hero-node" data-x="331" data-y="106" cx="331" cy="106" r="12" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.9"/>
-            <circle class="hero-node" data-x="348" data-y="248" cx="348" cy="248" r="14" fill="#1D4ED8" stroke="#3B82F6" stroke-width="2"/>
-            <circle class="hero-node" data-x="272" data-y="348" cx="272" cy="348" r="12" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.85"/>
-            <circle class="hero-node" data-x="128" data-y="348" cx="128" cy="348" r="11" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.75"/>
-            <circle class="hero-node" data-x="52" data-y="248" cx="52" cy="248" r="12" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.8"/>
-            <circle class="hero-node" data-x="69" data-y="106" cx="69" cy="106" r="11" fill="#1D4ED8" stroke="#3B82F6" stroke-width="1.5" opacity="0.75"/>
-            <circle class="hero-node" data-x="200" data-y="62" cx="200" cy="62" r="6" fill="#60A5FA" opacity="0.9"/>
-            <circle class="hero-node" data-x="331" data-y="106" cx="331" cy="106" r="5" fill="#60A5FA" opacity="0.7"/>
-            <circle class="hero-node" data-x="348" data-y="248" cx="348" cy="248" r="6" fill="#60A5FA" opacity="0.9"/>
-            <circle class="hero-node" data-x="272" data-y="348" cx="272" cy="348" r="5" fill="#60A5FA" opacity="0.65"/>
-            <circle class="hero-node" data-x="128" data-y="348" cx="128" cy="348" r="4.5" fill="#60A5FA" opacity="0.6"/>
-            <circle class="hero-node" data-x="52" data-y="248" cx="52" cy="248" r="5" fill="#60A5FA" opacity="0.65"/>
-            <circle class="hero-node" data-x="69" data-y="106" cx="69" cy="106" r="4.5" fill="#60A5FA" opacity="0.6"/>
-            <circle class="hero-node" data-x="200" data-y="200" cx="200" cy="200" r="28" fill="#1D4ED8"/>
-            <circle class="hero-node" data-x="200" data-y="200" cx="200" cy="200" r="17" fill="#3B82F6"/>
-            <circle class="hero-node" data-x="200" data-y="200" cx="200" cy="200" r="9" fill="#93C5FD"/>
-          </svg>
+        <div class="kh-hero__scroll" aria-hidden="true">
+          <div class="kh-scroll-track"><div class="kh-scroll-thumb"></div></div>
         </div>
       </section>
 
-      <section class="product-section products-build-section" id="products" aria-labelledby="products-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">What we're building</p>
-          <h2 id="products-title">Products and systems, in the open.</h2>
-          <p class="section-lead">A growing portfolio of platforms, data products, and intelligent systems — some live, some in active prototyping. Click any area to see what's inside.</p>
+      <!-- ═══════════════════════════════════════
+           PRODUCTS
+      ═══════════════════════════════════════ -->
+      <section class="kh-section kh-products" id="products" aria-labelledby="products-h2" data-reveal="section">
+        <div class="kh-section__header" data-reveal="item">
+          <p class="kh-kicker">What we're building</p>
+          <h2 id="products-h2">Products and systems,<br>in the open.</h2>
+          <p class="kh-section__lead">A growing portfolio of platforms, data products, and intelligent systems — grouped by category, each one click away. No detours.</p>
         </div>
-        <div id="product-expander-root">
-          <div class="product-grid" data-spotlight-grid>
-            <article class="product-card product-card-ml spotlight-tile is-visible" data-reveal="item">
-              <div class="product-thumb" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
+
+        <div class="kh-catalog">
+
+          <!-- ═══ KabulAI (Machine Learning & AI) ═══ -->
+          <section class="kh-cat" style="--ka:#6366f1" data-reveal="item" aria-labelledby="cat-ml">
+            <div class="kh-cat__head">
+              <span class="kh-cat__dot" aria-hidden="true"></span>
+              <h3 class="kh-cat__title" id="cat-ml">KabulAI</h3>
+              <span class="kh-cat__count">1 product</span>
+            </div>
+            <div class="kh-cat__grid">
+              <a class="kh-item" href="ocustate.html" target="_blank" rel="noopener">
+                <div class="kh-item__top">
+                  <h4 class="kh-item__name">OcuState Computer Vision</h4>
+                  <span class="kh-badge kh-badge--proto">PROTOTYPE</span>
+                </div>
+                <p class="kh-item__desc">Real-time drowsiness detection in the browser with TensorFlow.js and MediaPipe FaceMesh.</p>
+                <span class="kh-item__cta">
+                  <span>Open demo</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+            </div>
+          </section>
+
+          <!-- ═══ KabulLearn (Education) ═══ -->
+          <section class="kh-cat" style="--ka:#10b981" data-reveal="item" aria-labelledby="cat-edu">
+            <div class="kh-cat__head">
+              <span class="kh-cat__dot" aria-hidden="true"></span>
+              <h3 class="kh-cat__title" id="cat-edu">KabulLearn</h3>
+              <span class="kh-cat__count">1 product</span>
+            </div>
+            <div class="kh-cat__grid">
+              <a class="kh-item" href="https://www.kabullearn.com" target="_blank" rel="noopener">
+                <div class="kh-item__top">
+                  <h4 class="kh-item__name">KabulLearn</h4>
+                  <span class="kh-badge kh-badge--live">LIVE</span>
+                </div>
+                <p class="kh-item__desc">A trilingual Afghan learning platform — structured course pathways, video lessons, quiz checkpoints, and verified certificates.</p>
+                <span class="kh-item__cta">
+                  <span>Open website</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+            </div>
+          </section>
+
+          <!-- ═══ KabulApps (Software) ═══ -->
+          <section class="kh-cat" style="--ka:#f59e0b" data-reveal="item" aria-labelledby="cat-sw">
+            <div class="kh-cat__head">
+              <span class="kh-cat__dot" aria-hidden="true"></span>
+              <h3 class="kh-cat__title" id="cat-sw">KabulApps</h3>
+              <span class="kh-cat__count">2 products</span>
+            </div>
+            <div class="kh-cat__grid">
+              <a class="kh-item" href="https://github.com/samimshs/ML2-Final-Project/releases/download/desktop-apps-v0.1.0/daftarcha-windows.zip" rel="noopener">
+                <div class="kh-item__top">
+                  <h4 class="kh-item__name">Daftarcha</h4>
+                  <span class="kh-badge kh-badge--avail">AVAILABLE</span>
+                </div>
+                <p class="kh-item__desc">Offline-first business management app for inventory, sales, debts, reports, and AI assistance.</p>
+                <span class="kh-item__cta">
+                  <span>Download for Windows</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                </span>
+              </a>
+              <a class="kh-item" href="https://github.com/samimshs/ML2-Final-Project/releases/download/desktop-apps-v0.1.0/moneymate-windows.zip" rel="noopener">
+                <div class="kh-item__top">
+                  <h4 class="kh-item__name">KabulWallet</h4>
+                  <span class="kh-badge kh-badge--avail">AVAILABLE</span>
+                </div>
+                <p class="kh-item__desc">Personal finance desktop app for assets, expenses, ledgers, zakat tracking, and password-protected local accounts.</p>
+                <span class="kh-item__cta">
+                  <span>Download for Windows</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                </span>
+              </a>
+            </div>
+          </section>
+
+          <!-- ═══ DataHub (Data) ═══ -->
+          <section class="kh-cat" style="--ka:#22d3ee" data-reveal="item" aria-labelledby="cat-data">
+            <div class="kh-cat__head">
+              <span class="kh-cat__dot" aria-hidden="true"></span>
+              <h3 class="kh-cat__title" id="cat-data">DataHub</h3>
+              <span class="kh-cat__count">1 product</span>
+            </div>
+            <div class="kh-cat__grid">
+              <a class="kh-item" href="datahub/" target="_blank" rel="noopener">
+                <div class="kh-item__top">
+                  <h4 class="kh-item__name">DataHub</h4>
+                  <span class="kh-badge kh-badge--live">LIVE</span>
+                </div>
+                <p class="kh-item__desc">A global data explorer wired to World Bank, FAO, and WHO sources — indicators, charts, comparisons, and downloads.</p>
+                <span class="kh-item__cta">
+                  <span>Open explorer</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+            </div>
+          </section>
+
+          <!-- ═══ KabulLabs (Labs) ═══ -->
+          <section class="kh-cat" style="--ka:#a855f7" data-reveal="item" aria-labelledby="cat-labs">
+            <div class="kh-cat__head">
+              <span class="kh-cat__dot" aria-hidden="true"></span>
+              <h3 class="kh-cat__title" id="cat-labs">KabulLabs</h3>
+              <span class="kh-cat__count">Coming soon</span>
+            </div>
+            <div class="kh-cat__grid">
+              <div class="kh-item kh-item--empty">
+                <div class="kh-item__top">
+                  <h4 class="kh-item__name">Experiments in progress</h4>
+                  <span class="kh-badge kh-badge--research">RESEARCH</span>
+                </div>
+                <p class="kh-item__desc">Frameworks, notes, and prototypes that feed the next generation of KabulHub products. New experiments land here soon.</p>
               </div>
-              <div class="product-card-heading">
-                <i data-lucide="brain-circuit"></i>
-                <span>Machine Learning &amp; AI</span>
-              </div>
-              <div class="product-tags">
-                <span class="product-status product-status-primary">Prototype</span>
-                <span class="product-status">Models</span>
-              </div>
-              <p>Applied models, experiments, and intelligent systems.</p>
-              <small class="product-stat">OCUSTATE · COMPUTER VISION · DEMOS</small>
-              <a href="machine-learning.html">View products</a>
-            </article>
-            <article class="product-card product-card-education spotlight-tile is-visible" data-reveal="item">
-              <div class="product-thumb" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <div class="product-card-heading">
-                <i data-lucide="graduation-cap"></i>
-                <span>Education</span>
-              </div>
-              <div class="product-tags">
-                <span class="product-status product-status-green">Live</span>
-                <span class="product-status product-status-purple">Education</span>
-              </div>
-              <p>KabulLearn delivers trilingual courses, guided quizzes, and verified certificates.</p>
-              <small class="product-stat">KABULLEARN · COURSES · CERTIFICATES</small>
-              <a href="education.html">View products</a>
-            </article>
-            <article class="product-card product-card-software spotlight-tile is-visible" data-reveal="item">
-              <div class="product-thumb" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <div class="product-card-heading">
-                <i data-lucide="blocks"></i>
-                <span>Software</span>
-              </div>
-              <div class="product-tags">
-                <span class="product-status product-status-primary">Available</span>
-                <span class="product-status">Apps</span>
-              </div>
-              <p>Practical applications, systems, and product prototypes.</p>
-              <small class="product-stat">TOOLS · SYSTEMS · PROTOTYPES</small>
-              <a href="softwares.html">View products</a>
-            </article>
-            <article class="product-card product-card-data spotlight-tile is-visible" data-reveal="item">
-              <div class="product-thumb" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <div class="product-card-heading">
-                <i data-lucide="database"></i>
-                <span>Data</span>
-              </div>
-              <div class="product-tags">
-                <span class="product-status product-status-green">Live</span>
-                <span class="product-status">Analytics</span>
-              </div>
-              <p>Dashboards, data products, and analytical frameworks.</p>
-              <small class="product-stat">DASHBOARDS · DATA · INSIGHTS</small>
-              <a href="data.html">View products</a>
-            </article>
-            <article class="product-card product-card-labs spotlight-tile is-visible" data-reveal="item">
-              <div class="product-thumb" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <div class="product-card-heading">
-                <i data-lucide="sparkles"></i>
-                <span>Labs</span>
-              </div>
-              <div class="product-tags">
-                <span class="product-status product-status-warm">Research</span>
-                <span class="product-status">Ideas</span>
-              </div>
-              <p>Research ideas and experiments beyond the main categories.</p>
-              <small class="product-stat">EXPERIMENTS · NOTES · CONCEPTS</small>
-              <a href="others.html">View products</a>
-            </article>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           ABOUT
+      ═══════════════════════════════════════ -->
+      <section class="kh-section kh-about" id="about" aria-labelledby="about-h2" data-reveal="section">
+        <div class="kh-about__grid">
+          <div class="kh-about__left" data-reveal="item">
+            <p class="kh-kicker">About</p>
+            <h2 id="about-h2">Engineering clarity from raw data.</h2>
+            <p>KabulHub is a research, data, and technology company based in Chicago. Our work spans data science, economics, machine learning, software engineering, education, and applied research.</p>
+            <p>We care less about shipping features and more about whether the result actually helps someone decide, learn, or build.</p>
+          </div>
+          <div class="kh-about__right">
+            <div class="kh-values-card" data-reveal="item">
+              <p class="kh-kicker" style="color:#6366f1; margin-bottom:20px">Core Values</p>
+              <ol class="kh-values-list">
+                <li><div><strong>Truth over assumption</strong><span>We seek evidence before conclusions.</span></div></li>
+                <li><div><strong>Clarity through simplicity</strong><span>Complex problems deserve clear, elegant systems.</span></div></li>
+                <li><div><strong>Impact over activity</strong><span>The value of work is measured by better outcomes.</span></div></li>
+              </ol>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="content-section proof-section" id="proof" aria-labelledby="proof-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Proof of work</p>
-          <h2 id="proof-title">Evidence, not just claims.</h2>
-          <p class="section-lead">An honest look at what we have built and shipped so far — prototypes, platforms, and experiments, with room to add metrics and case studies as they mature.</p>
+      <!-- ═══════════════════════════════════════
+           WHO WE HELP
+      ═══════════════════════════════════════ -->
+      <section class="kh-section kh-audience" id="who-we-help" aria-labelledby="audience-h2" data-reveal="section">
+        <div class="kh-section__header" data-reveal="item">
+          <p class="kh-kicker">Who we help</p>
+          <h2 id="audience-h2">Made for learners, educators, teams, and builders.</h2>
         </div>
-        <div class="proof-grid" data-spotlight-grid>
-          <article class="proof-card spotlight-tile" data-reveal="item">
-            <div class="proof-card-head">
-              <span class="build-icon"><i data-lucide="layout-dashboard"></i></span>
-              <h3>Product prototypes</h3>
-            </div>
-            <p>Shipped, working prototypes including a real-time computer-vision demo and offline-first desktop apps.</p>
-            <!-- TODO: replace with a real metric, e.g. "4 shipped prototypes" -->
-            <div class="ph-metric" role="img" aria-label="Metric placeholder">
-              <i data-lucide="trending-up"></i>
-              <div>
-                <strong>Metric placeholder</strong>
-                <span>Add number of users, courses, dashboards, models, or projects.</span>
-              </div>
-            </div>
-          </article>
-          <article class="proof-card spotlight-tile" data-reveal="item">
-            <div class="proof-card-head">
-              <span class="build-icon"><i data-lucide="database"></i></span>
-              <h3>Data &amp; analytics systems</h3>
-            </div>
-            <p>A live data explorer wired to World Bank, FAO, and WHO sources with charts, comparisons, and exports.</p>
-            <!-- TODO: replace with a real DataHub demo clip -->
-            <div class="ph-video" role="img" aria-label="Demo video placeholder">
-              <span class="ph-play"><i data-lucide="play"></i></span>
-              <div>
-                <strong>Demo video placeholder</strong>
-                <span>Add a 30–60 second product walkthrough.</span>
-              </div>
-            </div>
-          </article>
-          <article class="proof-card spotlight-tile" data-reveal="item">
-            <div class="proof-card-head">
-              <span class="build-icon"><i data-lucide="graduation-cap"></i></span>
-              <h3>Education platform</h3>
-            </div>
-            <p>KabulLearn delivers trilingual courses, guided quizzes, and verified certificates — built and live.</p>
-            <!-- TODO: replace with a real KabulLearn screenshot -->
-            <div class="ph-shot" role="img" aria-label="Screenshot placeholder">
-              <span class="ph-label"><i data-lucide="image"></i> Screenshot placeholder</span>
-              <span class="ph-sub">Add product screenshot here</span>
-            </div>
-          </article>
-          <article class="proof-card spotlight-tile" data-reveal="item">
-            <div class="proof-card-head">
-              <span class="build-icon"><i data-lucide="brain-circuit"></i></span>
-              <h3>Machine learning experiments</h3>
-            </div>
-            <p>Browser-based ML experiments using TensorFlow.js and MediaPipe, exploring applied vision and inference.</p>
-            <!-- TODO: replace with a real before/after result or accuracy metric -->
-            <div class="ph-case" role="img" aria-label="Case study placeholder">
-              <i data-lucide="file-text"></i>
-              <div>
-                <strong>Case study placeholder</strong>
-                <span>Add the problem, solution, and result.</span>
-              </div>
-            </div>
-          </article>
-          <article class="proof-card spotlight-tile" data-reveal="item">
-            <div class="proof-card-head">
-              <span class="build-icon"><i data-lucide="sparkles"></i></span>
-              <h3>Research notes &amp; frameworks</h3>
-            </div>
-            <p>Working notes, analytical frameworks, and early concepts that feed the next round of products.</p>
-            <!-- TODO: replace with a real metric or link to published notes -->
-            <div class="ph-metric" role="img" aria-label="Metric placeholder">
-              <i data-lucide="trending-up"></i>
-              <div>
-                <strong>Metric placeholder</strong>
-                <span>Add count of notes, frameworks, or experiments.</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="content-section about-section" id="about" aria-labelledby="about-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">About</p>
-          <h2 id="about-title">Engineering clarity from raw data.</h2>
-        </div>
-        <div class="about-copy" data-reveal="item">
-          <p>KabulHub is a research, data, and technology company focused on transforming complex information into useful understanding.</p>
-          <p>We build software products, analytical frameworks, learning platforms, and intelligent systems for people and organizations that need clearer decisions.</p>
-          <p>Our work spans data science, economics, machine learning, software engineering, education, and applied research. The common thread is simple: turn complexity into clarity, and clarity into action.</p>
-        </div>
-      </section>
-
-      <section class="content-section statements-section" aria-labelledby="statements-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Vision & Mission</p>
-          <h2 id="statements-title">What drives the work.</h2>
-        </div>
-        <div class="statement-grid" aria-label="Vision and mission" data-spotlight-grid>
-          <article class="statement-panel spotlight-tile" id="vision" data-reveal="item">
-            <i data-lucide="telescope"></i>
-            <p class="section-kicker">Vision</p>
-            <h2>Advance human understanding.</h2>
-            <p>To help people move from data to knowledge, from knowledge to wisdom, and from wisdom to meaningful action.</p>
-          </article>
-          <article class="statement-panel spotlight-tile" id="mission" data-reveal="item">
-            <i data-lucide="compass"></i>
-            <p class="section-kicker">Mission</p>
-            <h2>Build tools for better decisions.</h2>
-            <p>To create educational platforms, data systems, AI tools, and research-driven products that help people understand complex problems and act with confidence.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="content-section values-section" id="values" aria-labelledby="values-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Core Values</p>
-          <h2 id="values-title">Principles that keep the work honest.</h2>
-        </div>
-        <div class="spotlight-grid values-grid" data-spotlight-grid>
-          <article class="spotlight-card spotlight-tile" data-reveal="item">
-            <span>01</span>
-            <h3>Truth over assumption</h3>
-            <p>We seek evidence before conclusions.</p>
-          </article>
-          <article class="spotlight-card spotlight-tile" data-reveal="item">
-            <span>02</span>
-            <h3>Understanding over information</h3>
-            <p>Information is not enough. The goal is meaning.</p>
-          </article>
-          <article class="spotlight-card spotlight-tile" data-reveal="item">
-            <span>03</span>
-            <h3>Clarity through simplicity</h3>
-            <p>Complex problems deserve clear explanations and elegant systems.</p>
-          </article>
-          <article class="spotlight-card spotlight-tile" data-reveal="item">
-            <span>04</span>
-            <h3>Curiosity without boundaries</h3>
-            <p>Good ideas often begin with better questions.</p>
-          </article>
-          <article class="spotlight-card spotlight-tile" data-reveal="item">
-            <span>05</span>
-            <h3>Impact over activity</h3>
-            <p>The value of work is measured by better decisions and outcomes.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="content-section audience-section" id="who-we-help" aria-labelledby="audience-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Who we help</p>
-          <h2 id="audience-title">Built for people who need clearer decisions.</h2>
-        </div>
-        <div class="audience-grid spotlight-grid" data-spotlight-grid>
-          <article class="audience-card spotlight-tile" data-reveal="item">
-            <span class="build-icon"><i data-lucide="user-round"></i></span>
+        <div class="kh-audience__grid">
+          <article class="kh-audience__card" data-reveal="item">
+            <div class="kh-audience__icon"><i data-lucide="user-round"></i></div>
             <h3>Learners</h3>
             <p>People building practical skills in technology, data, and applied problem solving.</p>
           </article>
-          <article class="audience-card spotlight-tile" data-reveal="item">
-            <span class="build-icon"><i data-lucide="users-round"></i></span>
+          <article class="kh-audience__card" data-reveal="item">
+            <div class="kh-audience__icon"><i data-lucide="users-round"></i></div>
             <h3>Educators</h3>
             <p>Instructors and institutions that need modern tools for teaching and assessment.</p>
           </article>
-          <article class="audience-card spotlight-tile" data-reveal="item">
-            <span class="build-icon"><i data-lucide="building-2"></i></span>
+          <article class="kh-audience__card" data-reveal="item">
+            <div class="kh-audience__icon"><i data-lucide="building-2"></i></div>
             <h3>Organizations</h3>
             <p>Teams that need dashboards, automation, analytics, and decision-support systems.</p>
           </article>
-          <article class="audience-card spotlight-tile" data-reveal="item">
-            <span class="build-icon"><i data-lucide="flask-conical"></i></span>
-            <h3>Researchers &amp; builders</h3>
-            <p>People exploring ideas, prototypes, models, and experiments.</p>
+          <article class="kh-audience__card" data-reveal="item">
+            <div class="kh-audience__icon"><i data-lucide="flask-conical"></i></div>
+            <h3>Researchers &amp; Builders</h3>
+            <p>People exploring ideas, prototypes, models, and experiments at the edge.</p>
           </article>
         </div>
       </section>
 
-      <section class="content-section process-section" id="how-we-work" aria-labelledby="process-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">How we work</p>
-          <h2 id="process-title">From a question to a working system.</h2>
+      <!-- ═══════════════════════════════════════
+           HOW WE WORK
+      ═══════════════════════════════════════ -->
+      <section class="kh-section kh-process" id="how-we-work" aria-labelledby="process-h2" data-reveal="section">
+        <div class="kh-section__header" data-reveal="item">
+          <p class="kh-kicker">How we work</p>
+          <h2 id="process-h2">From a question to a working system.</h2>
         </div>
-        <ol class="process-grid" data-reveal="item">
-          <li class="process-step">
-            <span class="process-num">1</span>
+        <ol class="kh-process__steps" data-reveal="item">
+          <li class="kh-step">
+            <span class="kh-step__num">01</span>
             <h3>Understand</h3>
-            <p>Define the problem, audience, data, and decision need.</p>
+            <p>Define the problem, audience, data, and the decision that needs to be made.</p>
           </li>
-          <li class="process-step">
-            <span class="process-num">2</span>
+          <li class="kh-step">
+            <span class="kh-step__num">02</span>
             <h3>Design</h3>
-            <p>Shape the product, workflow, model, or analytical framework.</p>
+            <p>Shape the product, workflow, model, or analytical framework that fits the need.</p>
           </li>
-          <li class="process-step">
-            <span class="process-num">3</span>
+          <li class="kh-step">
+            <span class="kh-step__num">03</span>
             <h3>Build</h3>
-            <p>Develop the platform, dashboard, prototype, or intelligent system.</p>
+            <p>Develop the platform, dashboard, prototype, or intelligent system end to end.</p>
           </li>
-          <li class="process-step">
-            <span class="process-num">4</span>
+          <li class="kh-step">
+            <span class="kh-step__num">04</span>
             <h3>Improve</h3>
-            <p>Test, measure, refine, and turn feedback into better outcomes.</p>
+            <p>Test, measure, refine, and turn real feedback into better outcomes over time.</p>
           </li>
         </ol>
       </section>
 
-      <section class="content-section contact-section" id="contact" aria-labelledby="contact-title" data-reveal="section">
-        <div class="section-copy" data-reveal="item">
-          <p class="section-kicker">Contact Us</p>
-          <h2 id="contact-title">Start a conversation.</h2>
-          <p class="section-lead">Tell us what you are trying to understand, build, automate, teach, or improve.</p>
+      <!-- ═══════════════════════════════════════
+           CONTACT
+      ═══════════════════════════════════════ -->
+      <section class="kh-section kh-contact" id="contact" aria-labelledby="contact-h2" data-reveal="section">
+        <div class="kh-section__header" data-reveal="item">
+          <p class="kh-kicker">Contact</p>
+          <h2 id="contact-h2">Start a conversation.</h2>
+          <p class="kh-section__lead">Tell us what you are trying to understand, build, automate, teach, or improve.</p>
         </div>
-        <!-- TODO: form posts to a Google Apps Script endpoint. Swap the action URL if you move to a different backend (e.g. a serverless email function). The submit handler in index.html degrades gracefully and shows a fallback email on error. -->
-        <form class="contact-form" name="contact" method="POST" action="https://script.google.com/macros/s/AKfycbzhBqFOR2j9-h8kcJ51woQR6nMKvFjzP1FqIeROtuXYdQJXZlKuQ1iNk4j3IRspyo6cIA/exec" data-contact-form data-reveal="item">
-          <input type="hidden" name="loaded_at" value="">
-          <label class="form-honeypot" aria-hidden="true">
-            <span>Website</span>
-            <input type="text" name="website" tabindex="-1" autocomplete="off">
-          </label>
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" autocomplete="name" required>
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" autocomplete="email" required>
-          </label>
-          <label>
-            <span>Organization</span>
-            <input type="text" name="organization" autocomplete="organization">
-          </label>
-          <label>
-            <span>Area of interest</span>
-            <select name="interest" required>
-              <option value="">Select one</option>
-              <option>Education platform</option>
-              <option>Data product / dashboard</option>
-              <option>AI or machine learning system</option>
-              <option>Software prototype</option>
-              <option>Research collaboration</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label>
-            <span>Timeline</span>
-            <select name="timeline">
-              <option value="">Select one</option>
-              <option>Immediately</option>
-              <option>1–3 months</option>
-              <option>3–6 months</option>
-              <option>Just exploring</option>
-            </select>
-          </label>
-          <label class="form-wide">
-            <span>Message</span>
-            <textarea name="message" rows="6" placeholder="Tell us what you are trying to understand, build, automate, teach, or improve." required></textarea>
-          </label>
-          <button class="primary-link form-submit" type="submit">
-            <span>Send message</span>
-            <i data-lucide="send"></i>
-          </button>
-          <p class="form-note">We usually respond within 1–2 business days.</p>
-          <p class="form-status" data-form-status aria-live="polite"></p>
-        </form>
+        <div class="kh-contact__card" data-reveal="item">
+          <!-- form posts to Google Apps Script; handler degrades gracefully on error -->
+          <form class="kh-form" name="contact" method="POST"
+                action="https://script.google.com/macros/s/AKfycbzhBqFOR2j9-h8kcJ51woQR6nMKvFjzP1FqIeROtuXYdQJXZlKuQ1iNk4j3IRspyo6cIA/exec"
+                data-contact-form>
+            <input type="hidden" name="loaded_at" value="">
+            <label class="form-honeypot" aria-hidden="true">
+              <span>Website</span>
+              <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </label>
+            <label class="kh-field">
+              <span class="kh-field__label">Name</span>
+              <input class="kh-field__input" type="text" name="name" autocomplete="name" required>
+            </label>
+            <label class="kh-field">
+              <span class="kh-field__label">Email</span>
+              <input class="kh-field__input" type="email" name="email" autocomplete="email" required>
+            </label>
+            <label class="kh-field">
+              <span class="kh-field__label">Organization</span>
+              <input class="kh-field__input" type="text" name="organization" autocomplete="organization">
+            </label>
+            <label class="kh-field">
+              <span class="kh-field__label">Area of interest</span>
+              <select class="kh-field__input" name="interest" required>
+                <option value="">Select one</option>
+                <option>Education platform</option>
+                <option>Data product / dashboard</option>
+                <option>AI or machine learning system</option>
+                <option>Software prototype</option>
+                <option>Research collaboration</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="kh-field">
+              <span class="kh-field__label">Timeline</span>
+              <select class="kh-field__input" name="timeline">
+                <option value="">Select one</option>
+                <option>Immediately</option>
+                <option>1–3 months</option>
+                <option>3–6 months</option>
+                <option>Just exploring</option>
+              </select>
+            </label>
+            <label class="kh-field kh-field--wide">
+              <span class="kh-field__label">Message</span>
+              <textarea class="kh-field__input" name="message" rows="5"
+                        placeholder="Tell us what you are trying to understand, build, automate, teach, or improve."
+                        required></textarea>
+            </label>
+            <button class="kh-btn kh-btn--primary kh-form__submit" type="submit">Send message</button>
+            <p class="kh-form__note">We usually respond within 1–2 business days.</p>
+            <p class="kh-form__status" data-form-status aria-live="polite"></p>
+          </form>
+        </div>
       </section>
+
     </main>
-    <footer class="site-footer">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="assets/branding/06-logo-horizontal-transparent.svg" alt="KabulHub">
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="kh-footer">
+      <div class="kh-footer__grid">
+        <div class="kh-footer__brand">
+          <img src="assets/branding/05b-logo-horizontal-white-icon.svg" alt="KabulHub" width="148" height="auto">
           <p>Research, data, and technology for meaningful understanding.</p>
+          <div class="kh-footer__social" aria-label="Social media">
+            <a href="https://twitter.com/KabulhubLLC" aria-label="Twitter / X" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.74 10.16 21.16 2h-1.76l-6.44 7.08L7.82 2H1.88l7.78 10.71L1.88 21.25h1.76l6.8-7.47 5.43 7.47h5.94l-8.07-11.09Zm-2.41 2.65-.79-1.07L4.27 3.33h2.7l5.06 6.79.79 1.07 6.58 8.83h-2.7l-5.37-7.21Z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/124633985/" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.34 3.95A2.32 2.32 0 1 1 .7 3.95a2.32 2.32 0 0 1 4.64 0ZM5 8H1v13h4V8Zm6.5 0H7.7v13h4v-6.84c0-1.8.34-3.54 2.57-3.54 2.2 0 2.23 2.06 2.23 3.66V21h4v-7.58c0-3.72-.8-6.58-5.15-6.58a4.51 4.51 0 0 0-4.06 2.23h-.05L11.5 8Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCiNcbGF1_DVyJ6rtDGMlAdQ" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.96-1.96C18.86 4 12 4 12 4s-6.86 0-8.58.46a2.78 2.78 0 0 0-1.96 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.96 1.96C5.14 20 12 20 12 20s6.86 0 8.58-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM9.75 15.27V8.73L15.5 12l-5.75 3.27Z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/kabulhub/" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7.25A4.75 4.75 0 1 1 12 16.75 4.75 4.75 0 0 1 12 7.25Zm0 2A2.75 2.75 0 1 0 12 14.75 2.75 2.75 0 0 0 12 9.25Zm5-2.38a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26Z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@kabulhub" aria-label="TikTok" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2c.34 2.39 1.68 3.82 4.02 3.98v4.08a7.48 7.48 0 0 1-4.02-1.23v6.12c0 4.3-3.09 7.05-6.82 7.05A6.43 6.43 0 0 1 3.4 15.55c0-4.04 3.34-7.08 7.5-6.42v4.2a2.44 2.44 0 1 0 1.72 2.33V2h3.98Z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61590261102836" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.75c0-.49.39-.88.88-.88H17V2h-3.13A4.87 4.87 0 0 0 9 6.87V8.5H6v4h3V22h5v-9.5h3.25l.75-4H14Z"/></svg>
+            </a>
+          </div>
         </div>
-        <nav class="footer-col" aria-label="Quick links">
+        <nav class="kh-footer__col" aria-label="Company links">
           <h4>Company</h4>
           <a href="#home-title">Home</a>
           <a href="#products">Products</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
-        <nav class="footer-col" aria-label="Products">
+        <nav class="kh-footer__col" aria-label="Product links">
           <h4>Products</h4>
           <a href="https://www.kabullearn.com" target="_blank" rel="noopener">KabulLearn</a>
-          <a href="machine-learning.html">Qustate</a>
-          <a href="data.html">Data Products</a>
-          <a href="machine-learning.html">AI Systems</a>
-          <a href="others.html">Labs</a>
+          <a href="datahub/" target="_blank" rel="noopener">DataHub</a>
+          <a href="ocustate.html" target="_blank" rel="noopener">OcuState</a>
+          <a href="https://github.com/samimshs/ML2-Final-Project/releases/download/desktop-apps-v0.1.0/daftarcha-windows.zip" rel="noopener">Daftarcha</a>
+          <a href="https://github.com/samimshs/ML2-Final-Project/releases/download/desktop-apps-v0.1.0/moneymate-windows.zip" rel="noopener">KabulWallet</a>
         </nav>
-        <div class="footer-col footer-contact-col">
+        <div class="kh-footer__col">
           <h4>Contact</h4>
           <a href="mailto:info@kabulhub.com">info@kabulhub.com</a>
-          <span class="footer-location">Chicago, Illinois, USA</span>
-          <span class="social-links" aria-label="Social media">
-            <a href="https://twitter.com/KabulhubLLC" aria-label="Twitter" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M13.74 10.16 21.16 2h-1.76l-6.44 7.08L7.82 2H1.88l7.78 10.71L1.88 21.25h1.76l6.8-7.47 5.43 7.47h5.94l-8.07-11.09Zm-2.41 2.65-.79-1.07L4.27 3.33h2.7l5.06 6.79.79 1.07 6.58 8.83h-2.7l-5.37-7.21Z"/>
-              </svg>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61590261102836" aria-label="Facebook" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14 8.5V6.75c0-.49.39-.88.88-.88H17V2h-3.13A4.87 4.87 0 0 0 9 6.87V8.5H6v4h3V22h5v-9.5h3.25l.75-4H14Z"/>
-              </svg>
-            </a>
-            <a href="https://www.tiktok.com/@kabulhub" aria-label="TikTok" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M16.6 2c.34 2.39 1.68 3.82 4.02 3.98v4.08a7.48 7.48 0 0 1-4.02-1.23v6.12c0 4.3-3.09 7.05-6.82 7.05A6.43 6.43 0 0 1 3.4 15.55c0-4.04 3.34-7.08 7.5-6.42v4.2a2.44 2.44 0 1 0 1.72 2.33V2h3.98Z"/>
-              </svg>
-            </a>
-            <a href="https://www.linkedin.com/company/124633985/" aria-label="LinkedIn" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5.34 3.95A2.32 2.32 0 1 1 .7 3.95a2.32 2.32 0 0 1 4.64 0ZM5 8H1v13h4V8Zm6.5 0H7.7v13h4v-6.84c0-1.8.34-3.54 2.57-3.54 2.2 0 2.23 2.06 2.23 3.66V21h4v-7.58c0-3.72-.8-6.58-5.15-6.58a4.51 4.51 0 0 0-4.06 2.23h-.05L11.5 8Z"/>
-              </svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UCiNcbGF1_DVyJ6rtDGMlAdQ" aria-label="YouTube" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.96-1.96C18.86 4 12 4 12 4s-6.86 0-8.58.46a2.78 2.78 0 0 0-1.96 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.96 1.96C5.14 20 12 20 12 20s6.86 0 8.58-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58ZM9.75 15.27V8.73L15.5 12l-5.75 3.27Z"/>
-              </svg>
-            </a>
-            <a href="https://www.instagram.com/kabulhub/" aria-label="Instagram" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7.25A4.75 4.75 0 1 1 12 16.75 4.75 4.75 0 0 1 12 7.25Zm0 2A2.75 2.75 0 1 0 12 14.75 2.75 2.75 0 0 0 12 9.25Zm5-2.38a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26Z"/>
-              </svg>
-            </a>
-          </span>
+          <span class="kh-footer__location">Chicago, Illinois, USA</span>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 KabulHub LLC. All rights reserved.</p>
-        <p class="footer-built">Research &amp; product company · Chicago, IL</p>
+      <div class="kh-footer__bottom">
+        <p>© 2026 KabulHub LLC · All rights reserved.</p>
+        <a class="kh-footer__backtop" href="#home-title">Back to top ↑</a>
       </div>
     </footer>
+
   </body>
 </html>

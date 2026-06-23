@@ -1,13 +1,6 @@
 # Samim Portfolio Site
 
-This folder contains the Netlify-ready portfolio website. The home page is a clean category launcher with:
-
-- **Machine Learning**: opens a list of machine learning projects.
-- **Softwares**: opens a list of software projects.
-- **Data**: opens a list of data projects and API-connected tools.
-- **Others**: reserved for future work.
-
-The existing OcuState detector content is preserved on its own page and remains reachable from the Machine Learning section.
+This folder contains the Netlify-ready portfolio website. `index.html` is a single-page site (dark theme) whose Products section lists every product inline, grouped into brand lines — **KabulAI**, **KabulLearn**, **KabulApps**, **DataHub**, and **KabulLabs** — each linking directly to the live product or download. There are no category landing pages.
 
 ## Local preview
 
@@ -23,38 +16,17 @@ Then visit:
 http://localhost:8888
 ```
 
-## Current sections
+## Current pages
 
-### Machine Learning
-
-- `machine-learning.html`: project list
-- `ocustate.html`: OcuState Computer Vision detector
+- `index.html`: main single-page site (hero, products, about, contact)
+- `ocustate.html`: OcuState Computer Vision detector — reachable from the KabulAI line
+- `daftarcha/`: built web copy of the Daftarcha business app (KabulApps)
+- `datahub/`: built web copy of the DataHub data explorer
+- `coming-soon.html`: holding page (published when `PUBLIC_HOLDING_PAGE=1`)
 
 OcuState Computer Vision is a browser-based drowsiness detector. It uses MediaPipe FaceMesh for facial landmarks and TensorFlow.js for the browser model workflow.
 
-### Softwares
-
-- `softwares.html`: software list
-
-Daftarcha is an offline-first business management app for small Afghan shops, wholesalers, pharmacies, and traders. The portfolio includes a built web copy at:
-
-```text
-daftarcha/
-```
-
-### Data
-
-- `data.html`: data project list
-
-DataHub is a global data explorer connected to public World Bank, FAO, and WHO data sources. The portfolio includes a built web copy at:
-
-```text
-datahub/
-```
-
-### Others
-
-- `others.html`: reserved category page for future additions
+Daftarcha is an offline-first business management app for small Afghan shops, wholesalers, pharmacies, and traders. DataHub is a global data explorer connected to public World Bank, FAO, and WHO data sources.
 
 ## OcuState model assets
 
