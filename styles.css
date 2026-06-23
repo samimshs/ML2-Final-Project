@@ -5447,35 +5447,93 @@ body.product-expanded-open {
   letter-spacing: 0.02em;
 }
 
-/* Scroll indicator */
-.kh-hero__scroll {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.kh-scroll-track {
-  width: 1px;
-  height: 52px;
-  background: rgba(255,255,255,0.1);
-  overflow: hidden;
+/* Scroll-progress indicator — fixed track on the right edge */
+.kh-scroll-progress {
+  position: fixed;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 40vh;
   border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  z-index: 900;
+  pointer-events: none;
 }
 
-.kh-scroll-thumb {
+/* Progress fill — grows from the top in proportion to scroll position */
+.kh-scroll-progress__fill {
   width: 100%;
-  height: 20px;
-  background: var(--kh-accent);
+  height: 0;                 /* updated on scroll via JS */
   border-radius: 999px;
-  animation: kh-scroll-slide 2s ease-in-out infinite;
+  background: var(--kh-accent);
+  box-shadow: 0 0 10px rgba(99,102,241,0.6), 0 0 4px rgba(99,102,241,0.85);
+  opacity: 1;
+  transition: height 0.15s linear, opacity 0.35s ease;  /* smooth fill + mode crossfade */
+  will-change: height;
+  animation: kh-progress-pulse 2.4s ease-in-out infinite;
 }
 
-@keyframes kh-scroll-slide {
-  0%   { transform: translateY(-20px); opacity: 0; }
-  15%  { opacity: 1; }
-  85%  { opacity: 1; }
-  100% { transform: translateY(52px); opacity: 0; }
+@keyframes kh-progress-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(99,102,241,0.5),  0 0 3px rgba(99,102,241,0.8); }
+  50%      { box-shadow: 0 0 16px rgba(99,102,241,0.9), 0 0 6px rgba(99,102,241,1); }
+}
+
+/* Idle "scanning" light — a soft glow that glides down the track at the top.
+   A gradient pseudo-element (transparent → indigo → transparent) so the ends
+   feather out with no hard edges; opacity fades at the extremes for a seamless
+   loop, and a blurred halo makes it read as travelling light, not a solid bar. */
+.kh-scroll-progress::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 46%;
+  border-radius: 999px;
+  background: linear-gradient(to bottom,
+    rgba(99,102,241,0)   0%,
+    rgba(129,140,248,0.95) 50%,
+    rgba(99,102,241,0) 100%);
+  box-shadow: 0 0 12px 1px rgba(99,102,241,0.45);
+  opacity: 0;
+  transform: translateY(-115%);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* Idle mode: fade the progress fill out, glide the scanning light */
+.kh-scroll-progress.is-idle .kh-scroll-progress__fill {
+  opacity: 0;
+}
+
+.kh-scroll-progress.is-idle::after {
+  animation: kh-idle-scan 2.8s ease-in-out infinite;
+}
+
+@keyframes kh-idle-scan {
+  0%   { transform: translateY(-115%); opacity: 0; }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { transform: translateY(238%);  opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kh-scroll-progress__fill {
+    animation: none;
+    transition: none;
+    box-shadow: none;
+  }
+  .kh-scroll-progress::after {
+    display: none;
+  }
+}
+
+/* Hide on mobile so it doesn't crowd content */
+@media (max-width: 768px) {
+  .kh-scroll-progress {
+    display: none;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -6277,10 +6335,6 @@ select.kh-field__input option {
   /* Hero */
   .kh-hero__h1 {
     font-size: clamp(2.8rem, 13vw, 4rem);
-  }
-
-  .kh-hero__scroll {
-    display: none;
   }
 
   /* Products */

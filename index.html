@@ -152,6 +152,36 @@
           init();
           tick();
         })();
+
+        /* Scroll-progress indicator (right edge) — idle scan at top, fills on scroll */
+        (function () {
+          const wrap = document.querySelector('.kh-scroll-progress');
+          const fill = wrap && wrap.querySelector('.kh-scroll-progress__fill');
+          if (!fill) return;
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const THRESHOLD = 10;
+          let ticking = false;
+          function update() {
+            const doc = document.documentElement;
+            const max = (doc.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+            const y = window.scrollY;
+            if (!reduce && y <= THRESHOLD) {
+              /* Idle state: let the CSS scan animation drive the segment */
+              wrap.classList.add('is-idle');
+              fill.style.height = '';
+            } else {
+              /* Progress state: fill grows with scroll position */
+              wrap.classList.remove('is-idle');
+              const p = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+              fill.style.height = (p * 100) + '%';
+            }
+            ticking = false;
+          }
+          const onScroll = () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } };
+          window.addEventListener('scroll', onScroll, { passive: true });
+          window.addEventListener('resize', onScroll, { passive: true });
+          update();
+        })();
       });
     </script>
   </head>
@@ -213,9 +243,6 @@
             <li>Software Engineering</li>
             <li>Education</li>
           </ul>
-        </div>
-        <div class="kh-hero__scroll" aria-hidden="true">
-          <div class="kh-scroll-track"><div class="kh-scroll-thumb"></div></div>
         </div>
       </section>
 
@@ -562,6 +589,11 @@
         <a class="kh-footer__backtop" href="#home-title">Back to top ↑</a>
       </div>
     </footer>
+
+    <!-- Scroll-progress indicator (fixed, right edge) -->
+    <div class="kh-scroll-progress" aria-hidden="true">
+      <div class="kh-scroll-progress__fill"></div>
+    </div>
 
   </body>
 </html>
