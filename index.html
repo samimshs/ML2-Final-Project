@@ -606,5 +606,15 @@
       <div class="kh-scroll-progress__fill"></div>
     </div>
 
+    <!-- n8n Chat widget -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      createChat({
+        webhookUrl: 'https://samimshs.app.n8n.cloud/webhook/01102539-4e29-4be6-ac75-678f8d6ab8f2/chat'
+      });
+    </script>
+
   </body>
 </html>
