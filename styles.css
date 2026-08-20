@@ -2861,6 +2861,10 @@ video {
   min-width: 0;
 }
 
+.status-panel[hidden] {
+  display: none;
+}
+
 .status-main,
 .meter-block,
 .metrics-grid,
